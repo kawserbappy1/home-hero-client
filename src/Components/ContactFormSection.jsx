@@ -2,8 +2,11 @@ import React from "react";
 
 export default function ContactFormSection() {
   return (
-    <div className="bg-bg1 sm:py-24 lg:py-32">
+    <div className="bg-bg1 ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h4 className="text-center text-5xl font-heading font-bold mb-10 text-greenColor pt-5">
+          GET IN TOUCH
+        </h4>
         <div className="lg:grid lg:grid-cols-2 lg:gap-12 xl:gap-20 items-center">
           <div className="mb-12 lg:mb-0 lg:pr-8">
             <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight font-heading">
