@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import Loader from "./Loader";
 
 const TopRatedProduct = () => {
   const [services, setServices] = useState([]);
@@ -10,8 +11,12 @@ const TopRatedProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         setServices(data);
+        setLoader(false);
       });
   }, []);
+  if (loader) {
+    return <Loader></Loader>;
+  }
   return (
     <div className="bg-bg1 py-16">
       <div className="container mx-auto ">
