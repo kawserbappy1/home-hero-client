@@ -99,7 +99,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile menu  */}
-        <div className="lg:hidden z-50 ">
+        <div className="lg:hidden z-60 ">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="cursor-pointer"
@@ -113,9 +113,9 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* destop menu  */}
+      {/* mobile menu  */}
       <div
-        className={`lg:hidden absolute top-0  bg-yellowColor min-h-screen w-full transition-all duration-500 ${
+        className={`lg:hidden absolute top-0  bg-bg3 min-h-screen w-full transition-all duration-500 z-50 ${
           menuOpen ? "-left-[100%]" : "left-0"
         }`}
       >

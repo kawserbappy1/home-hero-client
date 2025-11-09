@@ -29,3 +29,83 @@ html {
 .active {
   @apply text-yellowColor underline decoration-yellowColor underline-offset-3 font-medium;
 }
+
+/* --- Custom Navigation (Next/Prev) Styles --- */
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: transparent !important;
+  background-color: #2f5349;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-family: "Ionicons", sans-serif !important;
+  font-size: 18px !important;
+  font-weight: bold;
+  color: #ffd640;
+  content: none !important;
+}
+
+.swiper-button-next {
+  right: 10px !important;
+  top: 30px !important;
+}
+.swiper-button-next:hover {
+  background-color: #ffd640;
+  border: 2px solid #2f5349;
+}
+.swiper-button-next:hover::before {
+  color: #2f5349;
+}
+.swiper-button-next::before {
+  content: "→";
+  color: #ffd640;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.swiper-button-prev {
+  left: 10px !important;
+  top: 30px !important;
+}
+.swiper-button-prev:hover {
+  background-color: #ffd640;
+  border: 2px solid #2f5349;
+}
+.swiper-button-prev:hover::before {
+  color: #2f5349;
+}
+
+.swiper-button-prev::before {
+  content: "←";
+  color: #ffd640;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.swiper-pagination-bullet {
+  background-color: #d1d5db !important;
+  opacity: 1 !important;
+  width: 10px !important;
+  height: 10px !important;
+  margin: 0 4px !important;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #2f5349 !important;
+  width: 25px !important;
+  border-radius: 5px !important;
+}
