@@ -127,7 +127,11 @@ const TestimonialCard = ({
   iconColor,
 }) => (
   <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-100 flex flex-col justify-between h-full">
-    <div className="flex items-center space-x-3 mb-4">
+    <div
+      data-aos="fade-left"
+      data-aos-duration="4000"
+      className="flex items-center space-x-3 mb-4"
+    >
       <div className={`p-2 rounded-lg ${iconBg}`}>
         <Icon className={`w-5 h-5 ${iconColor}`} />
       </div>
@@ -175,7 +179,11 @@ export default function TestimonialGrid() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          data-aos="fade-down"
+          data-aos-duration="4000"
+        >
           {testimonials.map((testimonial, index) => (
             <TestimonialCard key={index} {...testimonial} />
           ))}

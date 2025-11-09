@@ -9,7 +9,11 @@ import { SiCcleaner } from "react-icons/si";
 
 const CategoryUI = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5  justify-center items-center gap-3 container mx-auto px-5 py-20 bg-bg2 my-20">
+    <div
+      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5  justify-center items-center gap-3 container mx-auto px-5 py-20 bg-bg2 my-20"
+      data-aos="fade-up"
+      data-aos-duration="4000"
+    >
       <div className="flex flex-col items-center border border-white p-5 shadow-xl rounded-md bg-white">
         <SiCcleaner className="text-4xl text-greenColor" />
         <h2 className=" font-heading text-2xl capitalize font-bold mt-5 text-greenColor">

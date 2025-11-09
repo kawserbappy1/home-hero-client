@@ -124,7 +124,11 @@ export default function PriceTable() {
   return (
     <div className="bg-white py-16 sm:py-24 font-sans min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-8">
+        <div
+          className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-8"
+          data-aos="fade-up"
+          data-aos-duration="4000"
+        >
           {pricingPlans.map((plan, index) => (
             <PriceCard key={index} plan={plan} />
           ))}

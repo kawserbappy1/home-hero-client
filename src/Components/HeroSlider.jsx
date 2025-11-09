@@ -42,7 +42,11 @@ const HeroSlider = () => {
           {/* slider 1  */}
           <div className="flex flex-col-reverse lg:flex-row items-center gap-10 py-20">
             {/* slider left  */}
-            <div className="flex-1">
+            <div
+              className="flex-1 "
+              data-aos="fade-right"
+              data-aos-duration="4000"
+            >
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold mb-5">
                 Realiable{" "}
                 <span className="text-yellowColor ">Cleaning Service</span> at
@@ -85,7 +89,11 @@ const HeroSlider = () => {
               </div>
             </div>
             {/* slider right  */}
-            <div className="flex-1 flex gap-2 items-center">
+            <div
+              className="flex-1 flex gap-2 items-center"
+              data-aos="fade-left"
+              data-aos-duration="4000"
+            >
               <div>
                 <div className="flex">
                   <img src={per1} alt="" className=" size-12 rounded-full " />
