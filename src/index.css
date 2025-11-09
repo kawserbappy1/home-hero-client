@@ -27,5 +27,5 @@ html {
   @apply font-poppins;
 }
 .active {
-  @apply text-greenColor underline decoration-yellowColor underline-offset-3 font-medium;
+  @apply text-yellowColor underline decoration-yellowColor underline-offset-3 font-medium;
 }
