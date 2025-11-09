@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const ProductCard = ({ service }) => {
   return (
@@ -63,9 +64,12 @@ const ProductCard = ({ service }) => {
         </div>
 
         {/* Action Button */}
-        <button className="w-full bg-greenColor hover:bg-yellowColor text-yellowColor hover:text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-greenColor focus:ring-offset-2">
+        <Link
+          to={`/services/${service._id}`}
+          className="inline-block w-full text-center bg-greenColor hover:bg-yellowColor text-yellowColor hover:text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-greenColor focus:ring-offset-2"
+        >
           See Details
-        </button>
+        </Link>
       </div>
     </div>
   );
