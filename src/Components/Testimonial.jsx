@@ -10,7 +10,11 @@ import {
   Diamond,
   Landmark,
 } from "lucide-react";
-
+import per from "../assets/per1.jpg";
+import per1 from "../assets/per2.jpg";
+import per2 from "../assets/per3.jpg";
+import per3 from "../assets/per4.jpg";
+import per4 from "../assets/per5.jpg";
 const testimonials = [
   {
     company: "Powersurge",
@@ -18,7 +22,7 @@ const testimonials = [
       "Untitled has been a lifesaver for our team—everything we need is right at our fingertips, and it helps us jump right into new design projects.",
     author: "Nikolas Gibbons",
     title: "Product Designer, Powersurge",
-    avatarUrl: "https://placehold.co/40x40/6366f1/ffffff?text=NG",
+    avatarUrl: per,
     Icon: Rocket,
     iconBg: "bg-indigo-50",
     iconColor: "text-indigo-600",
@@ -29,7 +33,7 @@ const testimonials = [
       "Untitled is our secret weapon for staying ahead of deadlines. It gives us everything we need to get started quickly.",
     author: "Ammar Foley",
     title: "UX Designer, Goodwell",
-    avatarUrl: "https://placehold.co/40x40/10b981/ffffff?text=AF",
+    avatarUrl: per1,
     Icon: Leaf,
     iconBg: "bg-emerald-50",
     iconColor: "text-emerald-600",
@@ -40,7 +44,7 @@ const testimonials = [
       "Our workflow has improved dramatically since we started using Untitled and it’s become an integral part of our workflow. It’s easy to use, and the resources are top-notch, I recommend it to everyone!",
     author: "Mathilde Lewis",
     title: "Project Lead, StackEd Lab",
-    avatarUrl: "https://placehold.co/40x40/3b82f6/ffffff?text=ML",
+    avatarUrl: per2,
     Icon: Cloud,
     iconBg: "bg-blue-50",
     iconColor: "text-blue-600",
@@ -50,7 +54,7 @@ const testimonials = [
     quote: "We love Untitled! It's made the design process super streamlined.",
     author: "Marco Kelly",
     title: "UI Designer, Railspeed",
-    avatarUrl: "https://placehold.co/40x40/ef4444/ffffff?text=MK",
+    avatarUrl: per3,
     Icon: Train,
     iconBg: "bg-red-50",
     iconColor: "text-red-600",
@@ -61,7 +65,7 @@ const testimonials = [
       "Untitled is hands down the best design library we’ve used. It has literally everything we need to get started for any possible project.",
     author: "Florence Shaw",
     title: "Web Designer, Quixotic",
-    avatarUrl: "https://placehold.co/40x40/c084fc/ffffff?text=FS",
+    avatarUrl: per4,
     Icon: Zap,
     iconBg: "bg-purple-50",
     iconColor: "text-purple-600",
@@ -72,7 +76,7 @@ const testimonials = [
       "Untitled is an absolute game-changer for our projects. We can't imagine going back to how we used to work without it.",
     author: "Stefan Sears",
     title: "UI/UX Designer, Magnolia",
-    avatarUrl: "https://placehold.co/40x40/ec4899/ffffff?text=SS",
+    avatarUrl: per1,
     Icon: Flower,
     iconBg: "bg-pink-50",
     iconColor: "text-pink-600",
@@ -83,7 +87,7 @@ const testimonials = [
       "Starting projects used to feel daunting, but Untitled simplifies everything. We've used it for both small and large projects, and it never disappoints.",
     author: "Zaid Schwartz",
     title: "Founder, Wildorcrafted",
-    avatarUrl: "https://placehold.co/40x40/22c55e/ffffff?text=ZS",
+    avatarUrl: per3,
     Icon: Diamond,
     iconBg: "bg-lime-50",
     iconColor: "text-lime-600",
@@ -94,7 +98,7 @@ const testimonials = [
       "With Untitled, we can focus more on design and less on the tedious setup work. Best money ever spent.",
     author: "Owen Garcia",
     title: "CTO, Solaris Energy",
-    avatarUrl: "https://placehold.co/40x40/f97316/ffffff?text=OG",
+    avatarUrl: per,
     Icon: Landmark,
     iconBg: "bg-orange-50",
     iconColor: "text-orange-600",
@@ -105,7 +109,7 @@ const testimonials = [
       "Untitled has been a real time-saver for us. It's organized, efficient, and keeps us moving forward with every project.",
     author: "Harriet Rojas",
     title: "Product Designer, Ikigai Labs",
-    avatarUrl: "https://placehold.co/40x40/5c6773/ffffff?text=HR",
+    avatarUrl: per2,
     Icon: Diamond,
     iconBg: "bg-gray-50",
     iconColor: "text-gray-600",
@@ -128,7 +132,7 @@ const TestimonialCard = ({
         <Icon className={`w-5 h-5 ${iconColor}`} />
       </div>
       <div className="flex items-center space-x-1">
-        <span className="text-gray-900 font-semibold">{company}</span>
+        <span className="text-greenColor font-semibold">{company}</span>
         <CheckCircle className="w-4 h-4 text-blue-500" />
       </div>
     </div>
@@ -141,7 +145,7 @@ const TestimonialCard = ({
       <img
         src={avatarUrl}
         alt={`Avatar of ${author}`}
-        className="w-10 h-10 rounded-full mr-4 object-cover"
+        className="w-10 h-10 rounded-full mr-4 object-cover border-2 border-yellowColor"
         onError={(e) => {
           e.target.onerror = null;
           e.target.src = "https://placehold.co/40x40/6b7280/ffffff?text=👤";
@@ -160,11 +164,11 @@ const TestimonialCard = ({
 
 export default function TestimonialGrid() {
   return (
-    <div className="py-16 sm:py-24 font-sans">
+    <div className="py-16 sm:py-24 ">
       <div className="container mx-auto px-2 sm:px-6 ">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading">
-            Our reviews
+            Our Reviews
           </h2>
           <p className="mt-4 text-xl text-gray-500">
             Hear first-hand from our incredible community of customers.
