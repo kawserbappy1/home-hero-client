@@ -9,19 +9,15 @@ const Loader = ({ size = "medium", text = "Loading..." }) => {
   };
   return (
     <div className="flex flex-col items-center justify-center p-8">
-      {/* Main Spinner */}
       <div className="relative">
-        {/* Outer ring - #2f5349 */}
         <div
           className={`${sizeClasses[size]} border-4 border-[#f8f7fe] rounded-full`}
         ></div>
 
-        {/* Animated spinner - #2f5349 and #ffd640 gradient */}
         <div
           className={`${sizeClasses[size]} border-4 border-transparent border-t-[#2f5349] border-r-[#ffd640] rounded-full absolute top-0 left-0 animate-spin`}
         ></div>
 
-        {/* Inner dot - #ffd640 */}
         <div
           className={`${sizeClasses[size]
             .replace("w-", "w-")
@@ -34,7 +30,6 @@ const Loader = ({ size = "medium", text = "Loading..." }) => {
         </div>
       </div>
 
-      {/* Loading text */}
       {text && (
         <p className="mt-4 text-[#2f5349] font-medium text-lg animate-pulse">
           {text}

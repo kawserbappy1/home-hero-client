@@ -57,7 +57,7 @@ const Register = () => {
       })
       .catch((error) => {
         console.error(error);
-        toast.error(error.message, { id: "create-user" });
+        toast.error(error.message);
       })
       .finally(() => setIsLoading(false));
   };
