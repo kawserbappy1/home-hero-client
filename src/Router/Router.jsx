@@ -9,6 +9,7 @@ import Profile from "../Pages/Profile/Profile";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -25,23 +26,43 @@ const router = createBrowserRouter([
       },
       {
         path: "services/:id",
-        element: <ServiceDetails></ServiceDetails>,
+        element: (
+          <PrivateRoute>
+            <ServiceDetails></ServiceDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-services",
-        element: <MyService></MyService>,
+        element: (
+          <PrivateRoute>
+            <MyService></MyService>
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-booking",
-        element: <MyBooking></MyBooking>,
+        element: (
+          <PrivateRoute>
+            <MyBooking></MyBooking>
+          </PrivateRoute>
+        ),
       },
       {
         path: "add-service",
-        element: <AddService></AddService>,
+        element: (
+          <PrivateRoute>
+            <AddService></AddService>
+          </PrivateRoute>
+        ),
       },
       {
         path: "profile",
-        element: <Profile></Profile>,
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",

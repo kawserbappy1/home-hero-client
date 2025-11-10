@@ -46,6 +46,8 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         updateUserProfile(displayName, photoURL);
+      })
+      .then(() => {
         Swal.fire({
           icon: "success",
           title: "Account Created Successfully!",

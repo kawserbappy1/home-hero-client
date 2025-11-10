@@ -31,8 +31,16 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  const updateUserProfile = (displayName, photoURL) => {
-    return updateProfile(auth.currentUser, { displayName, photoURL });
+  const updateUserProfile = async (displayName, photoURL) => {
+    if (!auth.currentUser) return;
+
+    await updateProfile(auth.currentUser, { displayName, photoURL });
+
+    setUser({
+      ...auth.currentUser,
+      displayName,
+      photoURL,
+    });
   };
 
   const signOutUser = () => {
@@ -43,7 +51,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      // console.log(currentUser)
       setLoading(false);
     });
 
