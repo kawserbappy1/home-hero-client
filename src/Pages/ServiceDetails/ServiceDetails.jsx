@@ -1,10 +1,12 @@
 import Loader from "../../Components/Loader";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { AuthContext } from "../../Context/AuthContex";
 
 const ServiceDetails = () => {
+  const { user } = use(AuthContext);
   const [loading, setLoading] = useState(true);
   const [selectedTab, setSelectedTab] = useState("overview");
   const [services, setServices] = useState({});
@@ -21,7 +23,6 @@ const ServiceDetails = () => {
         console.log(err);
       });
   }, []);
-  console.log(services);
   if (!services) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -369,6 +370,30 @@ const ServiceDetails = () => {
                       {services.serviceReview}/5
                     </span>
                   </div>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6"
+              >
+                <div className="space-y-3 text-sm">
+                  {user && user.email === services.provideremail && (
+                    <div className="flex items-center gap-3 justify-center mt-4">
+                      <Link
+                        to={`/update-service/${services._id}`}
+                        className="bg-greenColor text-yellowColor px-6 py-3
+                        font-bold rounded-md hover:bg-yellowColor
+                        hover:text-white transition-all duration-300"
+                      >
+                        Update your Service
+                      </Link>
+                      <button className="bg-red-600 text-white px-6 py-3 font-bold rounded-md hover:bg-red-700 transition-all duration-300">
+                        Delete your Service
+                      </button>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </div>
