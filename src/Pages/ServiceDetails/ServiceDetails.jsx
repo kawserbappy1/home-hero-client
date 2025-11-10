@@ -1,9 +1,10 @@
 import Loader from "../../Components/Loader";
 import React, { use, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { AuthContext } from "../../Context/AuthContex";
+import Swal from "sweetalert2";
 
 const ServiceDetails = () => {
   const { user } = use(AuthContext);
@@ -11,6 +12,7 @@ const ServiceDetails = () => {
   const [selectedTab, setSelectedTab] = useState("overview");
   const [services, setServices] = useState({});
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:3000/services/${id}`)
@@ -22,7 +24,42 @@ const ServiceDetails = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [user, id]);
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/services/${services._id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            navigate("/my-services");
+
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your service has been deleted.",
+              icon: "success",
+            });
+          })
+          .then((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
+
   if (!services) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -389,7 +426,10 @@ const ServiceDetails = () => {
                       >
                         Update your Service
                       </Link>
-                      <button className="bg-red-600 text-white px-6 py-3 font-bold rounded-md hover:bg-red-700 transition-all duration-300">
+                      <button
+                        onClick={handleDelete}
+                        className="bg-red-600 text-white px-6 py-3 font-bold rounded-md hover:bg-red-700 transition-all duration-300"
+                      >
                         Delete your Service
                       </button>
                     </div>

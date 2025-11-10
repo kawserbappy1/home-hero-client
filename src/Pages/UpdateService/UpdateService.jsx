@@ -6,6 +6,7 @@ const UpdateService = () => {
   const data = useLoaderData();
   const navigate = useNavigate();
   const service = data.result;
+
   const handleUpdateService = (e) => {
     e.preventDefault();
     const fomrData = {
