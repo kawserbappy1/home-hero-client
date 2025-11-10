@@ -1,25 +1,52 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../../Context/AuthContex";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { signInUser, signInWithGoogle } = use(AuthContext);
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // const handleChange = (e) => {
-  // };
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
+    console.log(email, password);
+    signInUser(email, password)
+      .then((result) => {
+        Swal.fire({
+          icon: "success",
+          title: "Sign Up Successfully!",
+          text: "Welcome Hero Home!",
+        });
+        e.target.reset();
+        navigate(location.state || "/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  //   setTimeout(() => {
-  //     console.log("Login data:");
-  //     setLoading(false);
-  //   }, 1500);
-  // };
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        Swal.fire({
+          icon: "success",
+          title: "Sign Up Successfully!",
+          text: "Welcome Hero Home!",
+        });
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 flex items-center justify-center p-4">
@@ -53,7 +80,7 @@ const Login = () => {
 
           {/* Form */}
           <div className="p-8">
-            <form className="space-y-6">
+            <form onSubmit={handleLogIn} className="space-y-6">
               {/* Email Input */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -178,7 +205,10 @@ const Login = () => {
               transition={{ delay: 0.9 }}
               className="mt-6 "
             >
-              <button className="w-full inline-flex justify-center items-center gap-2 py-2 px-4 border border-gray-300 rounded-xl shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors duration-200">
+              <button
+                onClick={handleGoogleSignIn}
+                className="w-full inline-flex justify-center items-center gap-2 py-2 px-4 border border-gray-300 rounded-xl shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors duration-200"
+              >
                 <FcGoogle /> Google
               </button>
             </motion.div>

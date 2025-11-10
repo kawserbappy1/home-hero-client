@@ -49,7 +49,7 @@ const Register = () => {
         Swal.fire({
           icon: "success",
           title: "Account Created Successfully!",
-          text: "Welcome aboard!",
+          text: "Welcome Hero Home!",
         });
         navigate("/");
       })
