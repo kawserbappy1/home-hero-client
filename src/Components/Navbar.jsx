@@ -37,7 +37,7 @@ const Navbar = () => {
 
         {/* cta part  */}
         <div className="flex gap-2">
-          <div className="relative">
+          {/* <div className="relative">
             <img
               src={userPic}
               onClick={() => setUserMenuOpen(!userMenuOpen)}
@@ -83,7 +83,7 @@ const Navbar = () => {
                 </Link>
               </div>
             )}
-          </div>
+          </div> */}
           <Link
             to="/login"
             className="bg-greenColor text-yellowColor px-2 py-2 md:px-4 md:py-2 rounded-md tracking-wider transition-all duration-500 hover:bg-yellowColor hover:text-greenColor"

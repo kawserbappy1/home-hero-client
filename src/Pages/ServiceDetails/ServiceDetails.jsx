@@ -7,9 +7,9 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 const ServiceDetails = () => {
   const [loading, setLoading] = useState(true);
   const [selectedTab, setSelectedTab] = useState("overview");
-
-  const { id } = useParams();
   const [services, setServices] = useState({});
+  const { id } = useParams();
+
   useEffect(() => {
     fetch(`http://localhost:3000/services/${id}`)
       .then((res) => res.json())
