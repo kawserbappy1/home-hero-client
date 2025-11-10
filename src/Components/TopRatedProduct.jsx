@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import Loader from "./Loader";
+import { Link } from "react-router";
 
 const TopRatedProduct = () => {
   const [services, setServices] = useState([]);
@@ -31,6 +32,15 @@ const TopRatedProduct = () => {
           {services.map((service) => (
             <ProductCard key={service._id} service={service}></ProductCard>
           ))}
+        </div>
+
+        <div className="flex items-center justify-center py-5 mt-5">
+          <Link
+            to={"/services"}
+            className="bg-greenColor text-yellowColor px-6 py-3 rounded-sm tracking-wider transition-all duration-500 hover:bg-yellowColor hover:text-greenColor"
+          >
+            View All Service
+          </Link>
         </div>
       </div>
     </div>

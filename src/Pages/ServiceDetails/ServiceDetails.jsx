@@ -1,5 +1,5 @@
 import Loader from "../../Components/Loader";
-import React, { use, useEffect, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate, useParams } from "react-router";
 import { IoIosArrowRoundBack } from "react-icons/io";
@@ -13,6 +13,7 @@ const ServiceDetails = () => {
   const [services, setServices] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
+  const serviceModalRef = useRef(null);
 
   useEffect(() => {
     fetch(`http://localhost:3000/services/${id}`)
@@ -299,14 +300,76 @@ const ServiceDetails = () => {
                   )}
 
                   <motion.button
+                    onClick={() => serviceModalRef.current.showModal()}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-greenColor hover:bg-yellowColor text-yellowColor hover:text-white font-bold py-4 px-6 rounded-xl transition-colors duration-200 text-lg"
+                    disabled={user?.email === services.provideremail} // disable if same user
+                    className={`w-full font-bold py-4 px-6 rounded-xl text-lg transition-colors duration-200
+                    ${
+                      user?.email === services.provideremail
+                        ? "bg-gray-400 text-white cursor-not-allowed" // disabled style
+                        : "bg-greenColor hover:bg-yellowColor text-yellowColor hover:text-white"
+                    }`}
                   >
                     Book Now
                   </motion.button>
+                  <dialog
+                    ref={serviceModalRef}
+                    className="modal modal-bottom sm:modal-middle"
+                  >
+                    <div className="modal-box">
+                      <h3 className="font-bold text-2xl font-heading text-center">
+                        {services.serviceName}
+                      </h3>
+                      <div className="">
+                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-1 py-2 border-b my-2">
+                          <h3 className=" ">Service Provider Name : </h3>
+                          <h3 className=" font-bold ">
+                            {services.providername}
+                          </h3>
+                        </div>
+                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-1 py-2 border-b my-2">
+                          <h3 className=" ">Service Review : </h3>
+                          <h3 className=" font-bold flex">
+                            {services.serviceReview}
+                            {renderStars(services.serviceReview)}
+                          </h3>
+                        </div>
+                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-1 py-2 border-b my-2">
+                          <h3 className="">Service Provider Expreccences : </h3>
+                          <h3 className=" font-bold ">
+                            {services.providerexperence}
+                          </h3>
+                        </div>
+                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-1 py-2 border-b my-2">
+                          <h3 className="">Price : </h3>
+                          <h3 className=" font-bold ">
+                            ${services.priceperhour} / hour
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="modal-action">
+                        <form method="dialog">
+                          <button className="btn text-greenColor bg-yellowColor">
+                            Booking Now
+                          </button>
+                          <button className="btn bg-greenColor text-yellowColor">
+                            Close
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
 
-                  <button className="w-full border border-greenColor text-greenColor font-semibold py-3 px-6 rounded-xl mt-3 hover:bg-greenColor hover:text-yellowColor transition-colors duration-200">
+                  <button
+                    disabled={user?.email === services.provideremail}
+                    className={`w-full border font-semibold py-3 px-6 rounded-xl mt-3 transition-colors duration-200
+    ${
+      user?.email === services.provideremail
+        ? "border-gray-400 text-gray-400 bg-gray-100 cursor-not-allowed"
+        : "border-greenColor text-greenColor hover:bg-greenColor hover:text-yellowColor"
+    }`}
+                  >
                     Contact Provider
                   </button>
                 </div>

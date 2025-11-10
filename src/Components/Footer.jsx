@@ -133,10 +133,19 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex gap-2">
-          <FaFacebook className="text-yellowColor cursor-pointer transition-all duration-500 hover:scale-150" />
-          <FaXTwitter className="text-yellowColor cursor-pointer transition-all duration-500 hover:scale-150" />
-          <FaInstagram className="text-yellowColor cursor-pointer transition-all duration-500 hover:scale-150" />
-          <FaTiktok className="text-yellowColor cursor-pointer transition-all duration-500 hover:scale-150" />
+          <Link to={"/https://github.com/kawserbappy1"}>
+            <FaFacebook className="text-yellowColor cursor-pointer transition-all duration-500 hover:scale-150" />
+          </Link>
+          <Link to={"/https://github.com/kawserbappy1"}>
+            <FaXTwitter className="text-yellowColor cursor-pointer transition-all duration-500 hover:scale-150" />
+          </Link>
+          <Link to={"/https://github.com/kawserbappy1"}>
+            <FaInstagram className="text-yellowColor cursor-pointer transition-all duration-500 hover:scale-150" />
+          </Link>
+
+          <Link to={"/https://github.com/kawserbappy1"}>
+            <FaTiktok className="text-yellowColor cursor-pointer transition-all duration-500 hover:scale-150" />
+          </Link>
         </div>
       </div>
     </div>

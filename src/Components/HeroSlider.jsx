@@ -23,6 +23,7 @@ import "swiper/css/pagination";
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import { SiOpenbadges } from "react-icons/si";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { Link } from "react-router";
 
 // import "./styles.css";
 
@@ -57,10 +58,13 @@ const HeroSlider = () => {
                 meet all your needs. Just touch at me one time we will always
                 with you.
               </p>
-              <button className="bg-greenColor text-yellowColor px-6 py-3 capitalize tracking-wider rounded-md flex items-center mb-5 cursor-pointer transition-all duration-500 hover:bg-yellowColor hover:text-greenColor">
+              <Link
+                to={"services"}
+                className="inline-flex bg-greenColor text-yellowColor px-6 py-3 capitalize tracking-wider rounded-md flex items-center mb-5 cursor-pointer transition-all duration-500 hover:bg-yellowColor hover:text-greenColor"
+              >
                 see all services{" "}
                 <IoIosArrowRoundForward className="ml-2 text-xl" />
-              </button>
+              </Link>
               <div className="flex items-center gap-5 mt-10">
                 <div className="border-r-3 border-r-bg3">
                   <h2 className="text-center font-heading text-3xl font-bold text-greenColor">
@@ -178,10 +182,13 @@ const HeroSlider = () => {
                 meet all your needs. Just touch at me one time we will always
                 with you.
               </p>
-              <button className="bg-greenColor text-yellowColor px-6 py-3 capitalize tracking-wider rounded-md flex items-center mb-5 cursor-pointer transition-all duration-500 hover:bg-yellowColor hover:text-greenColor">
+              <Link
+                to={"services"}
+                className="inline-flex bg-greenColor text-yellowColor px-6 py-3 capitalize tracking-wider rounded-md flex items-center mb-5 cursor-pointer transition-all duration-500 hover:bg-yellowColor hover:text-greenColor"
+              >
                 see all services{" "}
                 <IoIosArrowRoundForward className="ml-2 text-xl" />
-              </button>
+              </Link>
               <div className="flex items-center gap-5 mt-10">
                 <div className="border-r-3 border-r-bg3">
                   <h2 className="text-center font-heading text-3xl font-bold text-greenColor">
@@ -294,10 +301,13 @@ const HeroSlider = () => {
                 meet all your needs. Just touch at me one time we will always
                 with you.
               </p>
-              <button className="bg-greenColor text-yellowColor px-6 py-3 capitalize tracking-wider rounded-md flex items-center mb-5 cursor-pointer transition-all duration-500 hover:bg-yellowColor hover:text-greenColor">
+              <Link
+                to={"services"}
+                className="inline-flex bg-greenColor text-yellowColor px-6 py-3 capitalize tracking-wider rounded-md flex items-center mb-5 cursor-pointer transition-all duration-500 hover:bg-yellowColor hover:text-greenColor"
+              >
                 see all services{" "}
                 <IoIosArrowRoundForward className="ml-2 text-xl" />
-              </button>
+              </Link>
               <div className="flex items-center gap-5 mt-10">
                 <div className="border-r-3 border-r-bg3">
                   <h2 className="text-center font-heading text-3xl font-bold text-greenColor">
@@ -410,10 +420,13 @@ const HeroSlider = () => {
                 meet all your needs. Just touch at me one time we will always
                 with you.
               </p>
-              <button className="bg-greenColor text-yellowColor px-6 py-3 capitalize tracking-wider rounded-md flex items-center mb-5 cursor-pointer transition-all duration-500 hover:bg-yellowColor hover:text-greenColor">
+              <Link
+                to={"services"}
+                className="inline-flex bg-greenColor text-yellowColor px-6 py-3 capitalize tracking-wider rounded-md flex items-center mb-5 cursor-pointer transition-all duration-500 hover:bg-yellowColor hover:text-greenColor"
+              >
                 see all services{" "}
                 <IoIosArrowRoundForward className="ml-2 text-xl" />
-              </button>
+              </Link>
               <div className="flex items-center gap-5 mt-10">
                 <div className="border-r-3 border-r-bg3">
                   <h2 className="text-center font-heading text-3xl font-bold text-greenColor">
@@ -526,10 +539,13 @@ const HeroSlider = () => {
                 meet all your needs. Just touch at me one time we will always
                 with you.
               </p>
-              <button className="bg-greenColor text-yellowColor px-6 py-3 capitalize tracking-wider rounded-md flex items-center mb-5 cursor-pointer transition-all duration-500 hover:bg-yellowColor hover:text-greenColor">
+              <Link
+                to={"services"}
+                className="inline-flex bg-greenColor text-yellowColor px-6 py-3 capitalize tracking-wider rounded-md flex items-center mb-5 cursor-pointer transition-all duration-500 hover:bg-yellowColor hover:text-greenColor"
+              >
                 see all services{" "}
                 <IoIosArrowRoundForward className="ml-2 text-xl" />
-              </button>
+              </Link>
               <div className="flex items-center gap-5 mt-10">
                 <div className="border-r-3 border-r-bg3">
                   <h2 className="text-center font-heading text-3xl font-bold text-greenColor">
