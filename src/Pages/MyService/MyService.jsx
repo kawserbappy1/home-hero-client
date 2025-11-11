@@ -2,12 +2,8 @@ import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContex";
 import Loader from "../../Components/Loader";
 import ProductCard from "./../../Components/ProductCard";
-// http://localhost:3000/my-services?email=bappydu2015@gmail.com
-// {
-//         headers: {
-//           authorization: `Bearer ${user.accessToken}`,
-//         },
-//       }
+import NoServiceFound from "../../Components/NoServiceFound";
+
 const MyService = () => {
   const { user } = use(AuthContext);
   const [services, setServices] = useState([]);
@@ -27,11 +23,15 @@ const MyService = () => {
   }
   return (
     <div className="container mx-auto py-10">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {services.map((service) => (
-          <ProductCard key={service._id} service={service}></ProductCard>
-        ))}
-      </div>
+      {services.length < 1 ? (
+        <NoServiceFound></NoServiceFound>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {services.map((service) => (
+            <ProductCard key={service._id} service={service}></ProductCard>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

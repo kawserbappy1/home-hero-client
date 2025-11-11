@@ -1,5 +1,5 @@
 import Loader from "../../Components/Loader";
-import React, { use, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate, useParams } from "react-router";
 import { IoIosArrowRoundBack } from "react-icons/io";
@@ -7,10 +7,11 @@ import { AuthContext } from "../../Context/AuthContex";
 import Swal from "sweetalert2";
 
 const ServiceDetails = () => {
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [selectedTab, setSelectedTab] = useState("overview");
   const [services, setServices] = useState({});
+  const [bookingLoading, setBookingLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const serviceModalRef = useRef(null);
@@ -47,21 +48,78 @@ const ServiceDetails = () => {
           .then((res) => res.json())
           .then((data) => {
             navigate("/my-services");
-
             Swal.fire({
               title: "Deleted!",
               text: "Your service has been deleted.",
               icon: "success",
             });
           })
-          .then((err) => {
+          .catch((err) => {
             console.log(err);
           });
       }
     });
   };
 
-  if (!services) {
+  const handleBooking = async () => {
+    setBookingLoading(true);
+    const bookingData = {
+      serviceId: services._id,
+      serviceName: services.serviceName,
+      category: services.category,
+      priceperhour: services.priceperhour,
+      serviceurl: services.serviceurl,
+      providername: services.providername,
+      provideremail: services.provideremail,
+      providerimage: services.providerimage,
+      providernumber: services.providernumber,
+      userEmail: user.email,
+      userName: user.displayName || "User",
+      bookingDate: new Date().toISOString(),
+      status: "pending",
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      const result = await response.json();
+
+      if (result.insertedId) {
+        serviceModalRef.current.close();
+
+        Swal.fire({
+          title: "Booking Successful!",
+          text: "Your service has been booked successfully.",
+          icon: "success",
+          confirmButtonText: "View My Bookings",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/my-booking");
+          }
+        });
+      } else {
+        throw new Error("Failed to book service");
+      }
+    } catch (error) {
+      console.error("Booking error:", error);
+      Swal.fire({
+        title: "Booking Failed!",
+        text: "There was an error booking the service. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    } finally {
+      setBookingLoading(false);
+    }
+  };
+
+  if (!services || Object.keys(services).length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader />
@@ -69,7 +127,6 @@ const ServiceDetails = () => {
     );
   }
 
-  // Render star rating
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, index) => (
       <svg
@@ -87,7 +144,6 @@ const ServiceDetails = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
       <section className="bg-gradient-to-r from-green-50 to-blue-50 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -222,7 +278,7 @@ const ServiceDetails = () => {
                           />
                         </svg>
                       </div>
-                      <span className="text-gray-700">Truested Service</span>
+                      <span className="text-gray-700">Trusted Service</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
@@ -240,7 +296,9 @@ const ServiceDetails = () => {
                           />
                         </svg>
                       </div>
-                      <span className="text-gray-700">Money back gurantee</span>
+                      <span className="text-gray-700">
+                        Money back guarantee
+                      </span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
@@ -278,7 +336,6 @@ const ServiceDetails = () => {
 
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              {/* Pricing Card */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -303,60 +360,83 @@ const ServiceDetails = () => {
                     onClick={() => serviceModalRef.current.showModal()}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    disabled={user?.email === services.provideremail} // disable if same user
+                    disabled={user?.email === services.provideremail}
                     className={`w-full font-bold py-4 px-6 rounded-xl text-lg transition-colors duration-200
                     ${
                       user?.email === services.provideremail
-                        ? "bg-gray-400 text-white cursor-not-allowed" // disabled style
+                        ? "bg-gray-400 text-white cursor-not-allowed"
                         : "bg-greenColor hover:bg-yellowColor text-yellowColor hover:text-white"
                     }`}
                   >
                     Book Now
                   </motion.button>
+
                   <dialog
                     ref={serviceModalRef}
                     className="modal modal-bottom sm:modal-middle"
                   >
                     <div className="modal-box">
-                      <h3 className="font-bold text-2xl font-heading text-center">
+                      <h3 className="font-bold text-2xl font-heading text-center mb-6">
                         {services.serviceName}
                       </h3>
-                      <div className="">
-                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-1 py-2 border-b my-2">
-                          <h3 className=" ">Service Provider Name : </h3>
-                          <h3 className=" font-bold ">
-                            {services.providername}
-                          </h3>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-4 py-3 rounded-lg">
+                          <h3 className="font-medium">Service Provider:</h3>
+                          <h3 className="font-bold">{services.providername}</h3>
                         </div>
-                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-1 py-2 border-b my-2">
-                          <h3 className=" ">Service Review : </h3>
-                          <h3 className=" font-bold flex">
-                            {services.serviceReview}
-                            {renderStars(services.serviceReview)}
-                          </h3>
+                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-4 py-3 rounded-lg">
+                          <h3 className="font-medium">Service Review:</h3>
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold">
+                              {services.serviceReview}
+                            </span>
+                            <div className="flex">
+                              {renderStars(services.serviceReview)}
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-1 py-2 border-b my-2">
-                          <h3 className="">Service Provider Expreccences : </h3>
-                          <h3 className=" font-bold ">
+                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-4 py-3 rounded-lg">
+                          <h3 className="font-medium">Experience:</h3>
+                          <h3 className="font-bold">
                             {services.providerexperence}
                           </h3>
                         </div>
-                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-1 py-2 border-b my-2">
-                          <h3 className="">Price : </h3>
-                          <h3 className=" font-bold ">
+                        <div className="flex items-center justify-between bg-greenColor/30 text-greenColor px-4 py-3 rounded-lg">
+                          <h3 className="font-medium">Price:</h3>
+                          <h3 className="font-bold">
                             ${services.priceperhour} / hour
                           </h3>
                         </div>
+                        {user && (
+                          <div className="flex items-center justify-between bg-blue-50 text-blue-700 px-4 py-3 rounded-lg">
+                            <h3 className="font-medium">Booked by:</h3>
+                            <h3 className="font-bold">
+                              {user.displayName || user.email}
+                            </h3>
+                          </div>
+                        )}
                       </div>
-                      <div className="modal-action">
-                        <form method="dialog">
-                          <button className="btn text-greenColor bg-yellowColor">
-                            Booking Now
-                          </button>
-                          <button className="btn bg-greenColor text-yellowColor">
-                            Close
-                          </button>
-                        </form>
+                      <div className="modal-action flex gap-3 mt-6">
+                        <button
+                          onClick={handleBooking}
+                          disabled={bookingLoading}
+                          className="btn bg-greenColor text-yellowColor hover:bg-yellowColor hover:text-white border-0"
+                        >
+                          {bookingLoading ? (
+                            <>
+                              <span className="loading loading-spinner"></span>
+                              Booking...
+                            </>
+                          ) : (
+                            "Confirm Booking"
+                          )}
+                        </button>
+                        <button
+                          onClick={() => serviceModalRef.current.close()}
+                          className="btn bg-gray-500 text-white hover:bg-gray-600 border-0"
+                        >
+                          Cancel
+                        </button>
                       </div>
                     </div>
                   </dialog>
@@ -364,11 +444,11 @@ const ServiceDetails = () => {
                   <button
                     disabled={user?.email === services.provideremail}
                     className={`w-full border font-semibold py-3 px-6 rounded-xl mt-3 transition-colors duration-200
-    ${
-      user?.email === services.provideremail
-        ? "border-gray-400 text-gray-400 bg-gray-100 cursor-not-allowed"
-        : "border-greenColor text-greenColor hover:bg-greenColor hover:text-yellowColor"
-    }`}
+                    ${
+                      user?.email === services.provideremail
+                        ? "border-gray-400 text-gray-400 bg-gray-100 cursor-not-allowed"
+                        : "border-greenColor text-greenColor hover:bg-greenColor hover:text-yellowColor"
+                    }`}
                   >
                     Contact Provider
                   </button>
@@ -472,33 +552,30 @@ const ServiceDetails = () => {
                   </div>
                 </div>
               </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6"
-              >
-                <div className="space-y-3 text-sm">
-                  {user && user.email === services.provideremail && (
-                    <div className="flex items-center gap-3 justify-center mt-4">
-                      <Link
-                        to={`/update-service/${services._id}`}
-                        className="bg-greenColor text-yellowColor px-6 py-3
-                        font-bold rounded-md hover:bg-yellowColor
-                        hover:text-white transition-all duration-300"
-                      >
-                        Update your Service
-                      </Link>
-                      <button
-                        onClick={handleDelete}
-                        className="bg-red-600 text-white px-6 py-3 font-bold rounded-md hover:bg-red-700 transition-all duration-300"
-                      >
-                        Delete your Service
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
+
+              {user && user.email === services.provideremail && (
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6"
+                >
+                  <div className="flex flex-col gap-3">
+                    <Link
+                      to={`/update-service/${services._id}`}
+                      className="bg-greenColor text-yellowColor px-6 py-3 font-bold rounded-md hover:bg-yellowColor hover:text-white transition-all duration-300 text-center"
+                    >
+                      Update your Service
+                    </Link>
+                    <button
+                      onClick={handleDelete}
+                      className="bg-red-600 text-white px-6 py-3 font-bold rounded-md hover:bg-red-700 transition-all duration-300"
+                    >
+                      Delete your Service
+                    </button>
+                  </div>
+                </motion.div>
+              )}
             </div>
           </div>
         </div>
