@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 
 export default function ContactFormSection() {
-  // Animation variants
   const leftContentVariants = {
     hidden: { opacity: 0, x: -100 },
     visible: {
@@ -23,7 +22,7 @@ export default function ContactFormSection() {
       transition: {
         duration: 0.6,
         ease: "easeOut",
-        delay: 0.2, // Slight delay for staggered effect
+        delay: 0.2,
       },
     },
   };
@@ -58,7 +57,6 @@ export default function ContactFormSection() {
           viewport={{ once: true }}
           className="lg:grid lg:grid-cols-2 lg:gap-12 xl:gap-20 items-center"
         >
-          {/* Left Text Content - Fades in from left */}
           <motion.div
             variants={leftContentVariants}
             className="mb-12 lg:mb-0 lg:pr-8"
@@ -72,7 +70,6 @@ export default function ContactFormSection() {
             </p>
           </motion.div>
 
-          {/* Right Form Content - Fades in from right */}
           <motion.div
             variants={rightContentVariants}
             className="bg-gray-50 p-6 sm:p-8 md:p-10 rounded-2xl shadow-lg"
@@ -157,10 +154,7 @@ export default function ContactFormSection() {
                 transition={{ duration: 0.4, delay: 0.8 }}
                 viewport={{ once: true }}
               >
-                <button
-                  type="submit"
-                  className="w-full flex justify-center py-3 px-6 border border-transparent rounded-lg shadow-sm text-lg font-medium text-white bg-greenColor hover:bg-yellowColor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors duration-200"
-                >
+                <button className="w-full flex justify-center py-3 px-6 border border-transparent rounded-lg shadow-sm text-lg font-medium  text-yellowColor bg-greenColor hover:bg-greenColor/50 transition-colors duration-200">
                   Send For Services
                 </button>
               </motion.div>

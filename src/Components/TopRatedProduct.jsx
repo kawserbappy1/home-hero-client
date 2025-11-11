@@ -20,7 +20,7 @@ const TopRatedProduct = () => {
   }
   return (
     <div className="bg-bg1 py-16">
-      <div className="container mx-auto ">
+      <div className="container mx-auto px-2 shadow-lg">
         <h1 className="text-center text-5xl font-heading font-bold mb-8 text-greenColor">
           Our Top rated services
         </h1>

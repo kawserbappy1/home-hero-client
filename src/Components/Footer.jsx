@@ -9,22 +9,39 @@ import { NavLink, Link } from "react-router";
 import {
   FaFacebook,
   FaInstagram,
+  FaLocationArrow,
   FaRegCopyright,
   FaTiktok,
 } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaMapLocationDot, FaXTwitter } from "react-icons/fa6";
+import { PiPhoneCallFill } from "react-icons/pi";
+
 const Footer = () => {
   return (
     <div className="bg-greenColor px-2">
       <div className="container mx-auto py-10 grid grid-cols-12 border-b-2 border-b-bg4/20">
         {/* logo area  */}
-        <div className="col-span-12 md:col-span-4">
+        <div className="col-span-12  md:col-span-3">
           <img src={logo} alt="" className="w-40 mb-4" />
           <p className=" text-white text-sm mb-5 max-w-sm">
             Hero home is awesome home service porvider company. We provide
             fantastic service for your home. Quality, honesty, creative work our
             charchiterstic.{" "}
           </p>
+          <div className="my-3">
+            <div className="flex items-center gap-2">
+              <FaMapLocationDot className=" size-4 text-yellowColor" />
+              <p className="text-white">Location: Mirpur, Dkaha Bangladesh</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <FaLocationArrow className=" size-4 text-yellowColor" />
+              <p className="text-white">email: yourmail@mail.com</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <PiPhoneCallFill className=" size-4 text-yellowColor" />
+              <p className="text-white">Call: +888 1111 2222</p>
+            </div>
+          </div>
           <div className="flex items-center gap-2 flex-wrap mb-10 md:mb-0">
             <img
               src={paypal}
@@ -59,7 +76,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="col-span-12 sm:col-span-6 md:col-span-3 text-center mb-10 md:mb-0 text-white">
+        <div className="col-span-12  md:col-span-3  text-center mb-10 md:mb-0 text-white">
           <h1 className="text-xl font-bold text-white font-heading underline underline-offset-8 decoration-yellowColor  mb-4">
             Service
           </h1>
@@ -82,7 +99,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="col-span-12 sm:col-span-6 md:col-span-3 text-center mb-10 md:mb-0 text-white">
+        <div className="col-span-12 md:col-span-3  text-center mb-10 md:mb-0 text-white">
           <h1 className="text-xl font-bold text-white font-heading underline underline-offset-8 decoration-yellowColor  mb-4">
             Get Support
           </h1>
@@ -105,7 +122,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="col-span-12 md:col-span-2 text-center text-white">
+        <div className="col-span-12  md:col-span-3  text-center text-white">
           <h1 className="text-xl font-bold text-white font-heading underline underline-offset-8 decoration-yellowColor mb-4">
             Company
           </h1>

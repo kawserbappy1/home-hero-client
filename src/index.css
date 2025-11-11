@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Podkova:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @import "tailwindcss";
-@plugin "daisyui";
-
-/* font-family: "Podkova", serif; */
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+@custom-variant dark (&:is([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
   --font-heading: "Podkova", serif;
@@ -23,19 +24,164 @@
   --breakpoint-2xl: 96rem;
 }
 
+/* ===== IMPROVED THEME HANDLING WITH CSS VARIABLES ===== */
+:root {
+  --green-color: #2f5349;
+  --yellow-color: #ffd640;
+  --bg-1: #f8f7fe;
+  --bg-2: #e3f7ee;
+  --bg-3: #fef7ec;
+  --bg-4: #f6f1da;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --background-primary: #ffffff;
+  --background-secondary: #f9fafb;
+}
+
+[data-theme="dark"] {
+  --green-color: #2f5349;
+  --yellow-color: #ffd640;
+  --bg-1: #1a1a2e;
+  --bg-2: #16213e;
+  --bg-3: #0f3460;
+  --bg-4: #1f4068;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --background-primary: #111827;
+  --background-secondary: #1f2937;
+}
+
+/* Apply the CSS variables to your custom color classes */
+.bg-greenColor {
+  background-color: var(--green-color) !important;
+}
+
+.text-greenColor {
+  color: var(--green-color) !important;
+}
+
+.bg-yellowColor {
+  background-color: var(--yellow-color) !important;
+}
+
+.text-yellowColor {
+  color: var(--yellow-color) !important;
+}
+
+.bg-bg1 {
+  background-color: var(--bg-1) !important;
+}
+
+.bg-bg2 {
+  background-color: var(--bg-2) !important;
+}
+
+.bg-bg3 {
+  background-color: var(--bg-3) !important;
+}
+
+.bg-bg4 {
+  background-color: var(--bg-4) !important;
+}
+
+/* Fix for buttons and interactive elements */
+[data-theme="dark"] .btn-primary {
+  background-color: var(--green-color) !important;
+  border-color: var(--green-color) !important;
+  color: var(--yellow-color) !important;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background-color: #254439 !important;
+  border-color: #254439 !important;
+}
+
+[data-theme="dark"] .btn-secondary {
+  background-color: var(--yellow-color) !important;
+  border-color: var(--yellow-color) !important;
+  color: var(--green-color) !important;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background-color: #e6c13a !important;
+  border-color: #e6c13a !important;
+}
+
+/* Fix for borders with brand colors */
+[data-theme="light"] .border-greenColor,
+[data-theme="dark"] .border-greenColor {
+  border-color: var(--green-color) !important;
+}
+
+[data-theme="light"] .border-yellowColor,
+[data-theme="dark"] .border-yellowColor {
+  border-color: var(--yellow-color) !important;
+}
+
+/* Fix for hover states */
+[data-theme="light"] .hover\:bg-greenColor:hover,
+[data-theme="dark"] .hover\:bg-greenColor:hover {
+  background-color: var(--green-color) !important;
+}
+
+[data-theme="light"] .hover\:text-greenColor:hover,
+[data-theme="dark"] .hover\:text-greenColor:hover {
+  color: var(--green-color) !important;
+}
+
+[data-theme="light"] .hover\:bg-yellowColor:hover,
+[data-theme="dark"] .hover\:bg-yellowColor:hover {
+  background-color: var(--yellow-color) !important;
+}
+
+[data-theme="light"] .hover\:text-yellowColor:hover,
+[data-theme="dark"] .hover\:text-yellowColor:hover {
+  color: var(--yellow-color) !important;
+}
+
+/* Fix for focus states */
+[data-theme="light"] .focus\:ring-greenColor:focus,
+[data-theme="dark"] .focus\:ring-greenColor:focus {
+  --tw-ring-color: var(--green-color) !important;
+}
+
+[data-theme="light"] .focus\:ring-yellowColor:focus,
+[data-theme="dark"] .focus\:ring-yellowColor:focus {
+  --tw-ring-color: var(--yellow-color) !important;
+}
+
+/* Additional theme-aware text and background utilities */
+[data-theme="dark"] .text-gray-800,
+[data-theme="dark"] .text-gray-900 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-gray-600,
+[data-theme="dark"] .text-gray-700 {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: var(--background-primary) !important;
+}
+
+[data-theme="dark"] .bg-gray-50 {
+  background-color: var(--background-secondary) !important;
+}
+
+/* ===== REST OF YOUR EXISTING CSS ===== */
 html {
   @apply font-poppins;
 }
+
 .active {
   @apply text-yellowColor underline decoration-yellowColor underline-offset-3 font-medium;
 }
 
-/* --- Custom Navigation (Next/Prev) Styles --- */
-
 .swiper-button-next,
 .swiper-button-prev {
   color: transparent !important;
-  background-color: #2f5349;
+  background-color: var(--green-color);
   width: 40px !important;
   height: 40px !important;
   border-radius: 50% !important;
@@ -48,7 +194,7 @@ html {
   font-family: "Ionicons", sans-serif !important;
   font-size: 18px !important;
   font-weight: bold;
-  color: #ffd640;
+  color: var(--yellow-color);
   content: none !important;
 }
 
@@ -56,16 +202,19 @@ html {
   right: 10px !important;
   top: 30px !important;
 }
+
 .swiper-button-next:hover {
-  background-color: #ffd640;
-  border: 2px solid #2f5349;
+  background-color: var(--yellow-color);
+  border: 2px solid var(--green-color);
 }
+
 .swiper-button-next:hover::before {
-  color: #2f5349;
+  color: var(--green-color);
 }
+
 .swiper-button-next::before {
   content: "→";
-  color: #ffd640;
+  color: var(--yellow-color);
   font-size: 20px;
   position: absolute;
   top: 50%;
@@ -77,17 +226,19 @@ html {
   left: 10px !important;
   top: 30px !important;
 }
+
 .swiper-button-prev:hover {
-  background-color: #ffd640;
-  border: 2px solid #2f5349;
+  background-color: var(--yellow-color);
+  border: 2px solid var(--green-color);
 }
+
 .swiper-button-prev:hover::before {
-  color: #2f5349;
+  color: var(--green-color);
 }
 
 .swiper-button-prev::before {
   content: "←";
-  color: #ffd640;
+  color: var(--yellow-color);
   font-size: 20px;
   position: absolute;
   top: 50%;
@@ -105,7 +256,48 @@ html {
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #2f5349 !important;
+  background-color: var(--green-color) !important;
   width: 25px !important;
   border-radius: 5px !important;
+}
+
+/* Responsive SweetAlert2 Styles */
+.responsive-swal {
+  max-width: 90% !important;
+  width: auto !important;
+  margin: 1rem !important;
+}
+
+@media (min-width: 640px) {
+  .responsive-swal {
+    max-width: 500px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-swal {
+    max-width: 600px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-swal {
+    max-width: 700px !important;
+  }
+}
+
+/* Global theme transitions for smooth mode switching */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Ensure proper contrast in dark mode */
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="dark"] body {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
 }

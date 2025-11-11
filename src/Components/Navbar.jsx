@@ -1,9 +1,11 @@
 import { Link, NavLink } from "react-router";
 import logo from "../assets/logo.png";
 import { RiCloseLine, RiMenuFold3Line } from "react-icons/ri";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContex";
 import Swal from "sweetalert2";
+import { IoSunnySharp } from "react-icons/io5";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -16,7 +18,7 @@ const Navbar = () => {
       text: "You’ll be logged out from your account!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#16a34a", // green
+      confirmButtonColor: "#16a34a",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Logout",
     }).then((result) => {
@@ -43,16 +45,16 @@ const Navbar = () => {
   };
 
   return (
-    <div className="top-0 left-0 w-full z-50 bg-white shadow-sm">
-      <nav className="container mx-auto flex items-center justify-between h-16 px-2 lg:px-4">
+    <div className="top-0 left-0 w-full z-50 bg-white shadow-lg">
+      <nav className="container mx-auto flex items-center justify-between h-20 px-2 lg:px-4 bg-white">
         {/* Logo */}
         <Link to="/">
-          <img src={logo} alt="Logo" className="w-28 md:w-36 h-auto" />
+          <img src={logo} alt="Logo" className="w-24 md:w-36 h-auto" />
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden lg:block">
-          <ul className="flex items-center gap-4 uppercase text-base tracking-wider">
+          <ul className="flex items-center gap-4 uppercase text-base tracking-wider ">
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -73,6 +75,8 @@ const Navbar = () => {
 
         {/* User / Auth Section */}
         <div className="flex items-center gap-4">
+          <ThemeToggle></ThemeToggle>
+
           {user ? (
             <>
               {/* Avatar */}
@@ -92,28 +96,28 @@ const Navbar = () => {
                   <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg py-2 text-sm z-50">
                     <Link
                       to="/profile"
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="block px-4 py-2 hover:bg-gray-100 hover:text-greenColor"
                       onClick={() => setUserMenuOpen(false)}
                     >
                       Profile
                     </Link>
                     <Link
                       to="/my-services"
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="block px-4 py-2 hover:bg-gray-100 hover:text-greenColor"
                       onClick={() => setUserMenuOpen(false)}
                     >
                       My Service
                     </Link>
                     <Link
                       to="/my-booking"
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="block px-4 py-2 hover:bg-gray-100 hover:text-greenColor"
                       onClick={() => setUserMenuOpen(false)}
                     >
                       My Booking
                     </Link>
                     <Link
                       to="/profile"
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="block px-4 py-2 hover:bg-gray-100 hover:text-greenColor"
                       onClick={() => setUserMenuOpen(false)}
                     >
                       Edit Profile
@@ -128,10 +132,10 @@ const Navbar = () => {
                 )}
               </div>
 
-              {/* Logout Button (beside avatar) */}
+              {/* Logout Button */}
               <button
                 onClick={handleLogout}
-                className="bg-greenColor text-yellowColor px-4 py-2 rounded-md tracking-wider transition-all duration-300 hover:bg-yellowColor hover:text-greenColor"
+                className="bg-greenColor text-yellowColor px-3 py-2 md:px-4 md:py-2 text-sm md:text-md rounded-md tracking-wider transition-all duration-300 hover:bg-yellowColor hover:text-greenColor"
               >
                 Logout
               </button>
@@ -153,7 +157,10 @@ const Navbar = () => {
             className="cursor-pointer"
           >
             {menuOpen ? (
-              <RiMenuFold3Line size={25} color="black" />
+              <RiMenuFold3Line
+                className=" size-5 text-greenColor"
+                color="black"
+              />
             ) : (
               <RiCloseLine size={25} />
             )}

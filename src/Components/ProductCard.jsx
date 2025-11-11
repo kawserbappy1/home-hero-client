@@ -4,7 +4,6 @@ import { Link } from "react-router";
 const ProductCard = ({ service }) => {
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
-      {/* Service Image */}
       <div className="h-68 overflow-hidden">
         <img
           src={service.serviceurl}
@@ -13,28 +12,22 @@ const ProductCard = ({ service }) => {
         />
       </div>
 
-      {/* Card Content */}
       <div className="p-6">
-        {/* Category Badge */}
         <div className="inline-block px-3 py-1 bg-greenColor/20 rounded-full mb-3">
           <span className="text-xs font-semibold text-greenColor uppercase tracking-wide font-heading">
             {service.category}
           </span>
         </div>
 
-        {/* Service Name */}
         <h3 className="text-3xl font-bold text-greenColor mb-2 line-clamp-1 font-heading ">
           {service.serviceName}
         </h3>
 
-        {/* Description */}
         <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
           {service.description}
         </p>
 
-        {/* Price and Rating Section */}
         <div className="flex items-center justify-between mb-4">
-          {/* Price */}
           <div className="flex items-center">
             <span className="text-2xl font-bold text-gray-900 font-heading">
               ${service.priceperhour}
@@ -42,10 +35,8 @@ const ProductCard = ({ service }) => {
             <span className="text-gray-500 text-sm ml-1">/hr</span>
           </div>
 
-          {/* Rating */}
           <div className="flex items-center">
             <div className="flex items-center">
-              {/* Star Icon */}
               <svg
                 className="w-4 h-4 text-yellow-400 mr-1"
                 fill="currentColor"
@@ -58,15 +49,14 @@ const ProductCard = ({ service }) => {
               </span>
             </div>
             <span className="text-gray-500 text-sm ml-1">
-              ({service.reviewCount || "800+"} review)
+              ({service.reviewCount} review)
             </span>
           </div>
         </div>
 
-        {/* Action Button */}
         <Link
           to={`/services/${service._id}`}
-          className="inline-block w-full text-center bg-greenColor hover:bg-yellowColor text-yellowColor hover:text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-greenColor focus:ring-offset-2"
+          className="inline-block w-full text-center bg-greenColor hover:bg-yellowColor text-yellowColor hover:text-greenColor font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-greenColor focus:ring-offset-2"
         >
           See Details
         </Link>

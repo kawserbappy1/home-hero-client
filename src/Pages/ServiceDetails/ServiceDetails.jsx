@@ -30,20 +30,18 @@ const ServiceDetails = () => {
       });
   }, [user, id]);
 
-  // Fetch reviews when service is loaded
   useEffect(() => {
     if (services._id) {
       fetchReviews();
     }
   }, [services._id]);
 
-  // Handle URL parameters for auto-selecting reviews tab
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const tabParam = urlParams.get("tab");
     if (tabParam === "reviews") {
       setSelectedTab("reviews");
-      // Scroll to reviews section after a short delay
+
       setTimeout(() => {
         const reviewsSection = document.getElementById("reviews-section");
         if (reviewsSection) {
@@ -77,7 +75,7 @@ const ServiceDetails = () => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#2f5349",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
@@ -95,6 +93,7 @@ const ServiceDetails = () => {
               title: "Deleted!",
               text: "Your service has been deleted.",
               icon: "success",
+              confirmButtonColor: "#2f5349",
             });
           })
           .catch((err) => {
@@ -141,6 +140,7 @@ const ServiceDetails = () => {
           text: "Your service has been booked successfully.",
           icon: "success",
           confirmButtonText: "View My Bookings",
+          confirmButtonColor: "#2f5349",
         }).then((result) => {
           if (result.isConfirmed) {
             navigate("/my-booking");
@@ -187,7 +187,7 @@ const ServiceDetails = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <section className="bg-gradient-to-r from-green-50 to-blue-50 py-12">
+      <section className="bg-bg2 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -197,7 +197,7 @@ const ServiceDetails = () => {
           >
             <Link
               to={`/services`}
-              className="block text-left underline underline-offset-8 decoration-yellowColor flex items-center gap-1"
+              className="block text-left underline underline-offset-8 decoration-yellowColor flex items-center gap-1 mb-5"
             >
               <IoIosArrowRoundBack size={20} />
               Go to Service Page
@@ -390,28 +390,24 @@ const ServiceDetails = () => {
                         </div>
                       </div>
 
-                      {/* Add Review Button */}
                       {user && (
                         <button
                           onClick={() => {
-                            // Redirect to bookings page to leave review
                             window.location.href = "/my-booking";
                           }}
-                          className="bg-greenColor text-yellowColor px-4 py-2 rounded-lg hover:bg-yellowColor hover:text-white transition-all duration-200 text-sm font-medium"
+                          className="bg-greenColor text-yellowColor px-4 py-2 rounded-lg hover:bg-yellowColor hover:text-greenColor transition-all duration-200 text-sm font-medium"
                         >
                           Write a Review
                         </button>
                       )}
                     </div>
 
-                    {/* Reviews Loading */}
                     {reviewsLoading && (
                       <div className="flex justify-center py-8">
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-greenColor"></div>
                       </div>
                     )}
 
-                    {/* Reviews List */}
                     {!reviewsLoading && reviews.length > 0 ? (
                       <div className="space-y-6">
                         {reviews.map((review, index) => (
@@ -461,7 +457,6 @@ const ServiceDetails = () => {
                         ))}
                       </div>
                     ) : (
-                      /* No Reviews State */
                       !reviewsLoading && (
                         <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
                           <svg
@@ -535,7 +530,7 @@ const ServiceDetails = () => {
                     ${
                       user?.email === services.provideremail
                         ? "bg-gray-400 text-white cursor-not-allowed"
-                        : "bg-greenColor hover:bg-yellowColor text-yellowColor hover:text-white"
+                        : "bg-greenColor hover:bg-yellowColor text-yellowColor hover:text-greenColor"
                     }`}
                   >
                     Book Now
@@ -590,7 +585,7 @@ const ServiceDetails = () => {
                         <button
                           onClick={handleBooking}
                           disabled={bookingLoading}
-                          className="btn bg-greenColor text-yellowColor hover:bg-yellowColor hover:text-white border-0"
+                          className="btn bg-greenColor text-yellowColor hover:bg-yellowColor hover:text-greenColor border-0"
                         >
                           {bookingLoading ? (
                             <>
@@ -686,10 +681,6 @@ const ServiceDetails = () => {
                     <span>{services.provideremail}</span>
                   </div>
                 </div>
-
-                <button className="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm">
-                  View Profile
-                </button>
               </motion.div>
 
               <motion.div
@@ -737,7 +728,7 @@ const ServiceDetails = () => {
                   <div className="flex flex-col gap-3">
                     <Link
                       to={`/update-service/${services._id}`}
-                      className="bg-greenColor text-yellowColor px-6 py-3 font-bold rounded-md hover:bg-yellowColor hover:text-white transition-all duration-300 text-center"
+                      className="bg-greenColor text-yellowColor px-6 py-3 font-bold rounded-md hover:bg-yellowColor hover:text-greenColor transition-all duration-300 text-center"
                     >
                       Update your Service
                     </Link>

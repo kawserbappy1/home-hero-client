@@ -3,6 +3,7 @@ import { AuthContext } from "../../Context/AuthContex";
 import Loader from "../../Components/Loader";
 import ProductCard from "./../../Components/ProductCard";
 import NoServiceFound from "../../Components/NoServiceFound";
+import { Helmet } from "react-helmet";
 
 const MyService = () => {
   const { user } = use(AuthContext);
@@ -22,17 +23,22 @@ const MyService = () => {
     return <Loader></Loader>;
   }
   return (
-    <div className="container mx-auto py-10">
-      {services.length < 1 ? (
-        <NoServiceFound></NoServiceFound>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {services.map((service) => (
-            <ProductCard key={service._id} service={service}></ProductCard>
-          ))}
-        </div>
-      )}
-    </div>
+    <>
+      <Helmet>
+        <title>Hero Home || My Service</title>
+      </Helmet>
+      <div className="container mx-auto px-2 py-10">
+        {services.length < 1 ? (
+          <NoServiceFound></NoServiceFound>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {services.map((service) => (
+              <ProductCard key={service._id} service={service}></ProductCard>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

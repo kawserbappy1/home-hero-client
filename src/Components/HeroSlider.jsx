@@ -25,8 +25,6 @@ import { SiOpenbadges } from "react-icons/si";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { Link } from "react-router";
 
-// import "./styles.css";
-
 const HeroSlider = () => {
   return (
     <div className="container mx-auto px-2">

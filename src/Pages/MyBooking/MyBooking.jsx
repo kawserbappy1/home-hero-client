@@ -149,7 +149,6 @@ const MyBooking = () => {
                 icon: "success",
                 confirmButtonColor: "#2f5349",
               }).then(() => {
-                // Redirect to service details page with review tab active
                 window.location.href = `/services/${booking.serviceId}?tab=reviews`;
               });
             }
@@ -173,7 +172,7 @@ const MyBooking = () => {
       text: "This booking will be removed!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#2f5349",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
@@ -191,7 +190,6 @@ const MyBooking = () => {
     });
   };
 
-  // Calculate summary counts
   const totalBookings = bookings.length;
   const confirmedCount = bookings.filter(
     (b) => b.status === "confirmed"
@@ -252,8 +250,6 @@ const MyBooking = () => {
         <h1 className="text-3xl font-bold text-center mb-8 text-greenColor font-heading">
           My Bookings Service
         </h1>
-
-        {/* Summary */}
         <div className="my-6 bg-white rounded-lg shadow p-6">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
             Booking Summary
@@ -390,17 +386,14 @@ const MyBooking = () => {
 
                     <td className="py-4 px-4 text-center">
                       <div className="flex flex-col space-y-2">
-                        {/* Confirmed Provider Button - Only show for pending bookings */}
                         {booking.status === "pending" && (
                           <button
                             onClick={() => handleConfirm(booking._id)}
-                            className="bg-greenColor text-yellowColor px-4 py-2 rounded-lg hover:bg-yellowColor hover:text-white transition-all duration-200 text-sm font-medium"
+                            className="bg-greenColor text-yellowColor px-4 py-2 rounded-lg hover:bg-yellowColor hover:text-greenColor transition-all duration-200 text-sm font-medium"
                           >
                             Confirm Provider
                           </button>
                         )}
-
-                        {/* Leave Review Button - Only show for confirmed bookings */}
                         {booking.status === "confirmed" && (
                           <button
                             onClick={() => handleLeaveReview(booking)}
@@ -409,8 +402,6 @@ const MyBooking = () => {
                             Leave Review
                           </button>
                         )}
-
-                        {/* Cancel Button - Show for all bookings except cancelled */}
                         {booking.status !== "cancelled" && (
                           <button
                             onClick={() => handleDelete(booking._id)}

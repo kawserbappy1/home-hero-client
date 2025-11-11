@@ -126,8 +126,6 @@ const Register = () => {
                   />
                 </div>
               </motion.div>
-
-              {/* Email Input */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -238,7 +236,6 @@ const Register = () => {
                 </div>
               </motion.div>
 
-              {/* Terms & Conditions */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -261,7 +258,6 @@ const Register = () => {
                 </span>
               </motion.div>
 
-              {/* Submit Button */}
               <motion.button
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -281,7 +277,6 @@ const Register = () => {
               </motion.button>
             </form>
 
-            {/* Divider */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -300,7 +295,6 @@ const Register = () => {
               </div>
             </motion.div>
 
-            {/* Social Register */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -315,7 +309,6 @@ const Register = () => {
               </button>
             </motion.div>
 
-            {/* Sign In Link */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

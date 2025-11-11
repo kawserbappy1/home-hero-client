@@ -37,6 +37,7 @@ const UpdateService = () => {
           icon: "success",
           title: "Your Service Updated Successfully!",
           text: "Go to service page",
+          confirmButtonColor: "#2f5349",
         });
         navigate("/my-services");
       })
@@ -58,7 +59,6 @@ const UpdateService = () => {
         onSubmit={handleUpdateService}
         className="grid grid-cols-1 md:grid-cols-2 gap-6"
       >
-        {/* Service Name */}
         <div>
           <label className="block mb-1 font-semibold text-gray-700">
             Service Name
@@ -72,7 +72,6 @@ const UpdateService = () => {
           />
         </div>
 
-        {/* Category */}
         <div>
           <label className="block mb-1 font-semibold text-gray-700">
             Category
@@ -91,7 +90,6 @@ const UpdateService = () => {
           </select>
         </div>
 
-        {/* Price Per Hour */}
         <div>
           <label className="block mb-1 font-semibold text-gray-700">
             Price per Hour
@@ -105,7 +103,6 @@ const UpdateService = () => {
           />
         </div>
 
-        {/* Price Contact */}
         <div>
           <label className="block mb-1 font-semibold text-gray-700">
             Price Contact (True/False)
@@ -120,7 +117,6 @@ const UpdateService = () => {
           </select>
         </div>
 
-        {/* Description */}
         <div className="md:col-span-2">
           <label className="block mb-1 font-semibold text-gray-700">
             Description
@@ -133,7 +129,6 @@ const UpdateService = () => {
           />
         </div>
 
-        {/* Service URL */}
         <div className="md:col-span-2">
           <label className="block mb-1 font-semibold text-gray-700">
             Service Image URL
@@ -146,7 +141,6 @@ const UpdateService = () => {
           />
         </div>
 
-        {/* Provider Info */}
         <div>
           <label className="block mb-1 font-semibold text-gray-700">
             Provider Name
@@ -171,7 +165,6 @@ const UpdateService = () => {
           />
         </div>
 
-        {/* Email & Number */}
         <div>
           <label className="block mb-1 font-semibold text-gray-700">
             Provider Email
@@ -219,7 +212,6 @@ const UpdateService = () => {
           />
         </div>
 
-        {/* Submit Button */}
         <div className="md:col-span-2 flex justify-center mt-4">
           <motion.button
             whileHover={{ scale: 1.05 }}

@@ -1,7 +1,5 @@
 import React from "react";
 import { CheckCircle, Zap } from "lucide-react";
-
-// --- Price Card Data ---
 const pricingPlans = [
   {
     name: "General",
@@ -48,8 +46,8 @@ const pricingPlans = [
 ];
 
 const PriceCard = ({ plan }) => {
-  const textColor = plan.isPopular ? "text-white" : "text-[#333]";
-  const priceColor = plan.isPopular ? "text-white" : "text-[#333]";
+  const textColor = plan.isPopular ? "text-white" : "text-[#2f5349]";
+  const priceColor = plan.isPopular ? "text-white" : "text-[#2f5349]";
   const serviceColor = plan.isPopular ? "text-[#e0e9d6]" : "text-gray-700";
   const checkColor = plan.isPopular ? "text-yellow-400" : "text-[#ffd640]";
 
@@ -58,14 +56,14 @@ const PriceCard = ({ plan }) => {
       className={`relative flex flex-col items-center p-8 rounded-[3rem] shadow-xl transition-transform duration-300 ease-in-out hover:scale-[1.02] ${plan.bgColor}`}
     >
       {plan.isPopular && (
-        <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-[#ffd640] text-[#333] font-bold text-sm px-5 py-2 rounded-full shadow-lg whitespace-nowrap font-heading">
+        <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-[#ffd640] text-[#2f5349] font-bold text-sm px-5 py-2 rounded-full shadow-lg whitespace-nowrap font-heading">
           Most Popular
         </div>
       )}
 
       <h2
         className={`text-2xl font-semibold mb-6 pt-4 font-heading ${
-          plan.isPopular ? "text-white" : "text-gray-900"
+          plan.isPopular ? "text-white" : "text-[#2f5349]"
         }`}
       >
         {plan.name}
@@ -75,7 +73,9 @@ const PriceCard = ({ plan }) => {
         className={`p-5 rounded-full mb-6 ${plan.iconBg} flex items-center justify-center`}
       >
         <Zap
-          className={`w-8 h-8 ${plan.isPopular ? "text-white" : "text-[#333]"}`}
+          className={`w-8 h-8 ${
+            plan.isPopular ? "text-white" : "text-[#2f5349]"
+          }`}
           strokeWidth={1.5}
         />
       </div>
@@ -102,7 +102,7 @@ const PriceCard = ({ plan }) => {
             />
             <span
               className={`font-medium ${
-                plan.isPopular ? "text-white" : "text-[#333]"
+                plan.isPopular ? "text-white" : "text-[#2f5349]"
               }`}
             >
               {feature}
@@ -112,7 +112,7 @@ const PriceCard = ({ plan }) => {
       </ul>
 
       <button
-        className={`w-full py-3 rounded-xl font-bold text-lg text-[#333] transition-colors duration-200 hover:bg-yellow-400 ${plan.buttonColor}`}
+        className={`w-full py-3 rounded-xl font-bold text-lg text-[#2f5349] transition-colors duration-200 hover:bg-yellow-400 ${plan.buttonColor}`}
       >
         Get service
       </button>
