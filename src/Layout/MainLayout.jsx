@@ -1,11 +1,12 @@
 import Navbar from "../Components/Navbar";
 import { Outlet } from "react-router";
 import Footer from "../Components/Footer";
+import BottomToTop from "../Components/BottomToTop";
 
 const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <header>
+      <header className="h-20">
         <Navbar></Navbar>
       </header>
       <main className="flex-1">
@@ -14,6 +15,7 @@ const MainLayout = () => {
       <footer>
         <Footer></Footer>
       </footer>
+      <BottomToTop></BottomToTop>
     </div>
   );
 };
