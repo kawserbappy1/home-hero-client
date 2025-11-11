@@ -27,7 +27,7 @@ const Profile = () => {
         title: "Profile Updated!",
         text: "Your profile has been successfully updated.",
         icon: "success",
-        confirmButtonColor: "#16a34a",
+        confirmButtonColor: "#2f5349",
       });
       setEditMode(false);
     } catch (error) {

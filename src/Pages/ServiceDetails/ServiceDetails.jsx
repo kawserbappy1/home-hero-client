@@ -12,6 +12,8 @@ const ServiceDetails = () => {
   const [selectedTab, setSelectedTab] = useState("overview");
   const [services, setServices] = useState({});
   const [bookingLoading, setBookingLoading] = useState(false);
+  const [reviews, setReviews] = useState([]);
+  const [reviewsLoading, setReviewsLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const serviceModalRef = useRef(null);
@@ -27,6 +29,47 @@ const ServiceDetails = () => {
         console.log(err);
       });
   }, [user, id]);
+
+  // Fetch reviews when service is loaded
+  useEffect(() => {
+    if (services._id) {
+      fetchReviews();
+    }
+  }, [services._id]);
+
+  // Handle URL parameters for auto-selecting reviews tab
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get("tab");
+    if (tabParam === "reviews") {
+      setSelectedTab("reviews");
+      // Scroll to reviews section after a short delay
+      setTimeout(() => {
+        const reviewsSection = document.getElementById("reviews-section");
+        if (reviewsSection) {
+          reviewsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 800);
+    }
+  }, []);
+
+  const fetchReviews = () => {
+    setReviewsLoading(true);
+    fetch(`http://localhost:3000/reviews/${services._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setReviews(data.data);
+        } else {
+          setReviews([]);
+        }
+        setReviewsLoading(false);
+      })
+      .catch((err) => {
+        console.log("Error fetching reviews:", err);
+        setReviewsLoading(false);
+      });
+  };
 
   const handleDelete = () => {
     Swal.fire({
@@ -119,14 +162,6 @@ const ServiceDetails = () => {
     }
   };
 
-  if (!services || Object.keys(services).length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader />
-      </div>
-    );
-  }
-
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, index) => (
       <svg
@@ -141,6 +176,14 @@ const ServiceDetails = () => {
       </svg>
     ));
   };
+
+  if (!services || Object.keys(services).length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -324,10 +367,137 @@ const ServiceDetails = () => {
                 )}
 
                 {selectedTab === "reviews" && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                    <p className="text-gray-600">
-                      Customer reviews will be displayed here.
-                    </p>
+                  <motion.div
+                    id="reviews-section"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="space-y-6"
+                  >
+                    {/* Reviews Header */}
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900">
+                          Customer Reviews
+                        </h3>
+                        <div className="flex items-center gap-2 mt-2">
+                          <div className="flex items-center">
+                            {renderStars(services.serviceReview)}
+                          </div>
+                          <span className="text-gray-600">
+                            {reviews.length}{" "}
+                            {reviews.length === 1 ? "review" : "reviews"}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Add Review Button */}
+                      {user && (
+                        <button
+                          onClick={() => {
+                            // Redirect to bookings page to leave review
+                            window.location.href = "/my-booking";
+                          }}
+                          className="bg-greenColor text-yellowColor px-4 py-2 rounded-lg hover:bg-yellowColor hover:text-white transition-all duration-200 text-sm font-medium"
+                        >
+                          Write a Review
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Reviews Loading */}
+                    {reviewsLoading && (
+                      <div className="flex justify-center py-8">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-greenColor"></div>
+                      </div>
+                    )}
+
+                    {/* Reviews List */}
+                    {!reviewsLoading && reviews.length > 0 ? (
+                      <div className="space-y-6">
+                        {reviews.map((review, index) => (
+                          <motion.div
+                            key={review._id || index}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: index * 0.1 }}
+                            className="bg-gray-50 rounded-lg p-6 border border-gray-200"
+                          >
+                            <div className="flex items-start justify-between mb-4">
+                              <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                  <span className="text-green-600 font-semibold text-sm">
+                                    {review.userName?.charAt(0).toUpperCase() ||
+                                      "U"}
+                                  </span>
+                                </div>
+                                <div>
+                                  <h4 className="font-semibold text-gray-900">
+                                    {review.userName}
+                                  </h4>
+                                  <div className="flex items-center space-x-2">
+                                    <div className="flex">
+                                      {renderStars(review.rating)}
+                                    </div>
+                                    <span className="text-sm text-gray-500">
+                                      {new Date(
+                                        review.reviewDate
+                                      ).toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                      })}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <span className="inline-flex items-center px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
+                                Verified Booking
+                              </span>
+                            </div>
+                            <p className="text-gray-700 leading-relaxed">
+                              {review.comment}
+                            </p>
+                          </motion.div>
+                        ))}
+                      </div>
+                    ) : (
+                      /* No Reviews State */
+                      !reviewsLoading && (
+                        <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                          <svg
+                            className="w-16 h-16 text-gray-400 mx-auto mb-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1}
+                              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                            />
+                          </svg>
+                          <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                            No Reviews Yet
+                          </h4>
+                          <p className="text-gray-600 max-w-md mx-auto">
+                            Be the first to share your experience with this
+                            service. Your review will help others make better
+                            decisions.
+                          </p>
+                          {user && (
+                            <button
+                              onClick={() => {
+                                window.location.href = "/my-booking";
+                              }}
+                              className="mt-4 bg-greenColor text-yellowColor px-6 py-2 rounded-lg hover:bg-yellowColor hover:text-white transition-all duration-200 font-medium"
+                            >
+                              Write First Review
+                            </button>
+                          )}
+                        </div>
+                      )
+                    )}
                   </motion.div>
                 )}
               </div>
@@ -549,6 +719,10 @@ const ServiceDetails = () => {
                     <span className="font-semibold">
                       {services.serviceReview}/5
                     </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Reviews:</span>
+                    <span className="font-semibold">{reviews.length}</span>
                   </div>
                 </div>
               </motion.div>

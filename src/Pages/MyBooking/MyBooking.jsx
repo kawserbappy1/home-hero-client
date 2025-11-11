@@ -44,7 +44,6 @@ const MyBooking = () => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Update status to "confirmed" in the database
         fetch(`http://localhost:3000/booking/${id}`, {
           method: "PATCH",
           headers: {
@@ -55,7 +54,6 @@ const MyBooking = () => {
           .then((res) => res.json())
           .then((data) => {
             if (data.success) {
-              // Update local state
               setBookings(
                 bookings.map((booking) =>
                   booking._id === id
@@ -102,7 +100,7 @@ const MyBooking = () => {
           </div>
           <div>
             <label class="block text-gray-700 text-sm font-bold mb-2">Review Comment</label>
-            <textarea id="reviewComment" class="w-full border rounded-lg px-3 py-2" rows="4" placeholder="Share your experience..."></textarea>
+            <textarea id="reviewComment" class="w-full border rounded-lg px-3 py-2" rows="4" placeholder="Share your experience with this service..."></textarea>
           </div>
         </div>
       `,
@@ -124,15 +122,47 @@ const MyBooking = () => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        // Here you would typically send the review to your backend
-        console.log("Review submitted:", result.value);
+        const reviewData = {
+          serviceId: booking.serviceId,
+          serviceName: booking.serviceName,
+          providerEmail: booking.provideremail,
+          userEmail: user.email,
+          userName: user.displayName || "User",
+          rating: parseInt(result.value.rating),
+          comment: result.value.comment,
+          bookingId: booking._id,
+        };
 
-        Swal.fire({
-          title: "Thank You!",
-          text: "Your review has been submitted successfully.",
-          icon: "success",
-          confirmButtonColor: "#2f5349",
-        });
+        fetch("http://localhost:3000/reviews", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reviewData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              Swal.fire({
+                title: "Thank You!",
+                text: "Your review has been submitted successfully.",
+                icon: "success",
+                confirmButtonColor: "#2f5349",
+              }).then(() => {
+                // Redirect to service details page with review tab active
+                window.location.href = `/services/${booking.serviceId}?tab=reviews`;
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error submitting review:", error);
+            Swal.fire({
+              title: "Error!",
+              text: "Failed to submit review. Please try again.",
+              icon: "error",
+              confirmButtonColor: "#d33",
+            });
+          });
       }
     });
   };
@@ -167,6 +197,9 @@ const MyBooking = () => {
     (b) => b.status === "confirmed"
   ).length;
   const pendingCount = bookings.filter((b) => b.status === "pending").length;
+  const canReviewCount = bookings.filter(
+    (b) => b.status === "confirmed"
+  ).length;
 
   if (loading) {
     return (
@@ -225,7 +258,7 @@ const MyBooking = () => {
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
             Booking Summary
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
             <div className="text-center p-4 bg-green-50 rounded-lg">
               <div className="text-2xl font-bold text-green-600">
                 {totalBookings}
@@ -243,6 +276,12 @@ const MyBooking = () => {
                 {pendingCount}
               </div>
               <div className="text-gray-600">Pending</div>
+            </div>
+            <div className="text-center p-4 bg-purple-50 rounded-lg">
+              <div className="text-2xl font-bold text-purple-600">
+                {canReviewCount}
+              </div>
+              <div className="text-gray-600">Can Review</div>
             </div>
           </div>
         </div>
