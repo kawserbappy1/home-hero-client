@@ -105,19 +105,19 @@ const Footer = () => {
           </h1>
           <ul className="flex flex-col gap-3 uppercase text-sm tracking-wider">
             <li>
-              <Link>FAQ</Link>
+              <Link to={"/faq"}>FAQ</Link>
             </li>
             <li>
-              <Link>Contact Us</Link>
+              <Link to={"/contact"}>Contact Us</Link>
             </li>
             <li>
-              <Link>How it Work</Link>
+              <Link to={"/howitwork"}>How it Work</Link>
             </li>
             <li>
-              <Link>Service Gurantee</Link>
+              <Link to={"/service-guarantee"}>Service Gurantee</Link>
             </li>
             <li>
-              <Link>Free Consult </Link>
+              <Link to={"/free-consult"}>Free Consult </Link>
             </li>
           </ul>
         </div>
@@ -128,16 +128,16 @@ const Footer = () => {
           </h1>
           <ul className="flex flex-col gap-3 uppercase text-sm tracking-wider">
             <li>
-              <Link>About Us</Link>
+              <Link to={"/about-us"}>About Us</Link>
             </li>
             <li>
-              <Link>Careers</Link>
+              <Link to={"/careers"}>Careers</Link>
             </li>
             <li>
-              <Link>Privacy Policy</Link>
+              <Link to={"privacy-policy"}>Privacy Policy</Link>
             </li>
             <li>
-              <Link>Terms & Condition</Link>
+              <Link to={"/term-condition"}>Terms & Condition</Link>
             </li>
           </ul>
         </div>
