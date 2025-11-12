@@ -63,4 +63,4 @@ Hero Home is built with a modern and robust MERN-adjacent stack, utilizing the f
 
 If you have any questions or feedback, please feel free to reach out to the project maintainer.
 
-- **Your Name/GitHub Profile:** [Your Name/GitHub Link]
+- **Your Name/GitHub Profile:** https://github.com/kawserbappy1
