@@ -52,6 +52,10 @@
 }
 
 /* Apply the CSS variables to your custom color classes */
+[data-theme="light"] .text-greenColor,
+[data-theme="dark"] .text-greenColor {
+  color: #2f5349 !important; /* This forces dark green text even in dark mode */
+}
 .bg-greenColor {
   background-color: var(--green-color) !important;
 }

@@ -397,7 +397,7 @@ const MyBooking = () => {
                         {booking.status === "confirmed" && (
                           <button
                             onClick={() => handleLeaveReview(booking)}
-                            className="bg-yellowColor text-greenColor px-4 py-2 rounded-lg hover:bg-yellowColor/70 transition-all duration-200 text-sm font-medium"
+                            className="bg-yellowColor text-greenColor px-4 py-2 rounded-lg hover:bg-greenColor hover:text-yellowColor transition-all duration-200 text-sm font-medium"
                           >
                             Leave Review
                           </button>

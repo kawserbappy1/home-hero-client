@@ -56,7 +56,7 @@ const Navbar = () => {
     <>
       {/* Sticky Navbar */}
       <header
-        className={`fixed top-0 left-0 w-full z-[999] transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-[999] transition-all duration-300 shadow-sm ${
           isSticky ? "bg-white shadow-md backdrop-blur-sm" : "bg-transparent"
         }`}
       >
