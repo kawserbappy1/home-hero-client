@@ -12,6 +12,7 @@ import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
 import PrivateRoute from "./PrivateRoute";
 import UpdateService from "../Pages/UpdateService/UpdateService";
 import ErrorPage from "../Components/ErrorPage";
+import ServiceProviderInfo from "../Pages/ServiceProviderInfo/ServiceProviderInfo";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: "registration",
         element: <Register></Register>,
+      },
+      {
+        path: "service-provider-info",
+        element: <ServiceProviderInfo></ServiceProviderInfo>,
       },
     ],
   },

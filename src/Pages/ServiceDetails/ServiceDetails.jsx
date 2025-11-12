@@ -605,18 +605,6 @@ const ServiceDetails = () => {
                       </div>
                     </div>
                   </dialog>
-
-                  <button
-                    disabled={user?.email === services.provideremail}
-                    className={`w-full border font-semibold py-3 px-6 rounded-xl mt-3 transition-colors duration-200
-                    ${
-                      user?.email === services.provideremail
-                        ? "border-gray-400 text-gray-400 bg-gray-100 cursor-not-allowed"
-                        : "border-greenColor text-greenColor hover:bg-greenColor hover:text-yellowColor"
-                    }`}
-                  >
-                    Contact Provider
-                  </button>
                 </div>
               </motion.div>
 
@@ -681,6 +669,17 @@ const ServiceDetails = () => {
                     <span>{services.provideremail}</span>
                   </div>
                 </div>
+                <button
+                  disabled={user?.email === services.provideremail}
+                  className={`w-full border font-semibold py-3 px-6 rounded-xl mt-3 transition-colors duration-200
+                    ${
+                      user?.email === services.provideremail
+                        ? "border-gray-400 text-gray-400 bg-gray-100 cursor-not-allowed"
+                        : "border-greenColor text-greenColor hover:bg-greenColor hover:text-yellowColor"
+                    }`}
+                >
+                  <Link to={"/service-provider-info"}>Contact Provider</Link>
+                </button>
               </motion.div>
 
               <motion.div
