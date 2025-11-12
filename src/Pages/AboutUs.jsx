@@ -66,7 +66,6 @@ const AboutUs = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
       <section className="bg-bg2 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -94,7 +93,6 @@ const AboutUs = () => {
       </section>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Mission Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -119,12 +117,11 @@ const AboutUs = () => {
           </div>
         </motion.div>
 
-        {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-16"
         >
           {stats.map((stat, index) => (
             <div
@@ -139,7 +136,6 @@ const AboutUs = () => {
           ))}
         </motion.div>
 
-        {/* Our Story */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -179,7 +175,6 @@ const AboutUs = () => {
           </div>
         </motion.div>
 
-        {/* Our Values */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -205,7 +200,6 @@ const AboutUs = () => {
           </div>
         </motion.div>
 
-        {/* Leadership Team */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -234,7 +228,6 @@ const AboutUs = () => {
           </div>
         </motion.div>
 
-        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

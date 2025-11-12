@@ -18,7 +18,6 @@ import {
 } from "recharts";
 
 const ServiceProviderInfo = () => {
-  // Static data for charts
   const revenueData = [
     { month: "Jan", revenue: 4000 },
     { month: "Feb", revenue: 3000 },
@@ -116,7 +115,6 @@ const ServiceProviderInfo = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
       <section className="bg-bg2 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -145,9 +143,7 @@ const ServiceProviderInfo = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Contact Methods */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -185,7 +181,6 @@ const ServiceProviderInfo = () => {
               </div>
             </motion.div>
 
-            {/* Charts Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -196,7 +191,6 @@ const ServiceProviderInfo = () => {
                 Performance Analytics
               </h2>
 
-              {/* Revenue Chart */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">
                   Monthly Revenue
@@ -219,7 +213,6 @@ const ServiceProviderInfo = () => {
                 </ResponsiveContainer>
               </div>
 
-              {/* Customer Reviews Chart */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">
                   Customer Reviews Distribution
@@ -236,7 +229,6 @@ const ServiceProviderInfo = () => {
                 </ResponsiveContainer>
               </div>
 
-              {/* Service Distribution Chart */}
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">
                   Service Distribution
@@ -269,7 +261,6 @@ const ServiceProviderInfo = () => {
               </div>
             </motion.div>
 
-            {/* Service Systems */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -320,9 +311,7 @@ const ServiceProviderInfo = () => {
             </motion.div>
           </div>
 
-          {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Modern Technology */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -355,7 +344,6 @@ const ServiceProviderInfo = () => {
               </div>
             </motion.div>
 
-            {/* Quick Stats */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -385,7 +373,6 @@ const ServiceProviderInfo = () => {
               </div>
             </motion.div>
 
-            {/* Call to Action */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}

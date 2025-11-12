@@ -14,7 +14,9 @@ const MyBooking = () => {
   }, [user]);
 
   const fetchBookings = () => {
-    fetch(`http://localhost:3000/booking?email=${user.email}`)
+    fetch(
+      `https://hero-home-server-sage.vercel.app/booking?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data) {
@@ -44,7 +46,7 @@ const MyBooking = () => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/booking/${id}`, {
+        fetch(`https://hero-home-server-sage.vercel.app/booking/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -133,7 +135,7 @@ const MyBooking = () => {
           bookingId: booking._id,
         };
 
-        fetch("http://localhost:3000/reviews", {
+        fetch("https://hero-home-server-sage.vercel.app/reviews", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -177,7 +179,7 @@ const MyBooking = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/booking/${id}`, {
+        fetch(`https://hero-home-server-sage.vercel.app/booking/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -236,7 +238,7 @@ const MyBooking = () => {
         </p>
         <button
           onClick={() => (window.location.href = "/services")}
-          className="bg-greenColor text-yellowColor px-6 py-3 rounded-lg font-semibold hover:bg-yellowColor hover:text-white transition-colors duration-200"
+          className="bg-greenColor text-yellowColor px-6 py-3 rounded-lg font-semibold  transition-colors duration-200"
         >
           Browse Services
         </button>

@@ -19,7 +19,7 @@ const ServiceDetails = () => {
   const serviceModalRef = useRef(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/services/${id}`)
+    fetch(`https://hero-home-server-sage.vercel.app/services/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setServices(data.result);
@@ -53,7 +53,7 @@ const ServiceDetails = () => {
 
   const fetchReviews = () => {
     setReviewsLoading(true);
-    fetch(`http://localhost:3000/reviews/${services._id}`)
+    fetch(`https://hero-home-server-sage.vercel.app/reviews/${services._id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -80,12 +80,15 @@ const ServiceDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/services/${services._id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        fetch(
+          `https://hero-home-server-sage.vercel.app/services/${services._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             navigate("/my-services");
@@ -122,13 +125,16 @@ const ServiceDetails = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/booking", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      });
+      const response = await fetch(
+        "https://hero-home-server-sage.vercel.app/booking",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bookingData),
+        }
+      );
 
       const result = await response.json();
 
@@ -373,7 +379,6 @@ const ServiceDetails = () => {
                     animate={{ opacity: 1 }}
                     className="space-y-6"
                   >
-                    {/* Reviews Header */}
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                       <div>
                         <h3 className="text-xl font-bold text-gray-900">
@@ -418,7 +423,7 @@ const ServiceDetails = () => {
                             transition={{ duration: 0.3, delay: index * 0.1 }}
                             className="bg-gray-50 rounded-lg p-6 border border-gray-200"
                           >
-                            <div className="flex items-start justify-between mb-4">
+                            <div className="flex items-start flex-col md:flex-row justify-between mb-4 gap-2 md:gap-0">
                               <div className="flex items-center space-x-3">
                                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
                                   <span className="text-green-600 font-semibold text-sm">
@@ -430,7 +435,7 @@ const ServiceDetails = () => {
                                   <h4 className="font-semibold text-gray-900">
                                     {review.userName}
                                   </h4>
-                                  <div className="flex items-center space-x-2">
+                                  <div className="flex flex-col md:flex-row items-center space-x-2">
                                     <div className="flex">
                                       {renderStars(review.rating)}
                                     </div>

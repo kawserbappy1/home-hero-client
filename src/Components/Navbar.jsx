@@ -54,7 +54,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Sticky Navbar */}
       <header
         className={`fixed top-0 left-0 w-full z-[999] transition-all duration-300 shadow-sm ${
           isSticky ? "bg-white shadow-md backdrop-blur-sm" : "bg-transparent"
@@ -132,13 +131,11 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* User / Auth Section */}
           <div className="flex items-center gap-4">
             <ThemeToggle />
 
             {user ? (
               <>
-                {/* Avatar */}
                 <div className="relative">
                   <img
                     src={

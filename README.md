@@ -51,54 +51,6 @@ Hero Home is built with a modern and robust MERN-adjacent stack, utilizing the f
 
 ---
 
-## 🚀 Getting Started
-
-_(If you were to deploy this, you would add detailed setup instructions here. For now, this is a placeholder structure.)_
-
-### Prerequisites
-
-- Node.js (LTS version recommended)
-- MongoDB instance (local or Atlas)
-- A Firebase project for authentication
-
-### Installation
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [Your Repository URL Here]
-    cd hero-home
-    ```
-2.  **Install dependencies (Client & Server):**
-
-    ```bash
-    # For the frontend
-    cd client-side-folder
-    npm install
-
-    # For the backend
-    cd ../server-side-folder
-    npm install
-    ```
-
-3.  **Set up Environment Variables:**
-    Create a `.env` file in the root of the **backend** folder and add your configuration (e.g., MongoDB URI, Firebase Service Account keys, etc.).
-
-4.  **Run the application:**
-
-    ```bash
-    # Start the backend server
-    cd server-side-folder
-    npm start
-
-    # Start the frontend development server
-    cd ../client-side-folder
-    npm run dev
-    ```
-
-    The application will typically be available at `http://localhost:5173` (or similar port).
-
----
-
 ## 🔗 Live Site
 
 _(If you have a deployed link, include it here.)_

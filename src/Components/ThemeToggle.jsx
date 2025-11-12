@@ -1,32 +1,3 @@
-// import { useEffect, useState } from "react";
-
-// const ThemeToggle = () => {
-//   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-//   useEffect(() => {
-//     const html = document.querySelector("html");
-//     html.setAttribute("data-theme", theme);
-//     localStorage.setItem("theme", theme);
-//   }, [theme]);
-
-//   const handleTheme = (checked) => {
-//     setTheme(checked ? "dark" : "light");
-//   };
-
-//   return (
-//     <label className="flex items-center gap-2 cursor-pointer">
-//       <input
-//         onChange={(e) => handleTheme(e.target.checked)}
-//         type="checkbox"
-//         checked={theme === "dark"}
-//         className="toggle"
-//       />
-//     </label>
-//   );
-// };
-
-// export default ThemeToggle;
-
 import { useEffect, useState } from "react";
 
 const ThemeToggle = () => {
@@ -39,12 +10,10 @@ const ThemeToggle = () => {
     html.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
 
-    // Inject custom theme styles
     injectThemeStyles(theme);
   }, [theme]);
 
   const injectThemeStyles = (currentTheme) => {
-    // Remove existing style element if it exists
     const existingStyle = document.getElementById("custom-theme-styles");
     if (existingStyle) {
       existingStyle.remove();
@@ -94,34 +63,3 @@ const ThemeToggle = () => {
 };
 
 export default ThemeToggle;
-
-// import { useEffect, useState } from "react";
-
-// const ThemeToggle = () => {
-//   const [theme, setTheme] = useState(() => {
-//     return localStorage.getItem("theme") || "light";
-//   });
-
-//   useEffect(() => {
-//     const html = document.querySelector("html");
-//     html.setAttribute("data-theme", theme);
-//     localStorage.setItem("theme", theme);
-//   }, [theme]);
-
-//   const handleTheme = (checked) => {
-//     setTheme(checked ? "dark" : "light");
-//   };
-
-//   return (
-//     <label className="flex items-center gap-2 cursor-pointer">
-//       <input
-//         onChange={(e) => handleTheme(e.target.checked)}
-//         type="checkbox"
-//         checked={theme === "dark"}
-//         className="toggle"
-//       />
-//     </label>
-//   );
-// };
-
-// export default ThemeToggle;

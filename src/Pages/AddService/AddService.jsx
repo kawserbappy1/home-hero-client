@@ -33,7 +33,7 @@ const AddService = () => {
       serviceReview: e.target.serviceReview.value,
     };
 
-    fetch("http://localhost:3000/services", {
+    fetch("https://hero-home-server-sage.vercel.app/services", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -47,7 +47,6 @@ const AddService = () => {
           title: "Your Service Added Successfully!",
           text: "Go to service page",
           confirmButtonColor: "#2f5349",
-          width: "90%",
           customClass: {
             container: "responsive-swal",
             popup: "responsive-swal-popup",

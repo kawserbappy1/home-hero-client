@@ -46,7 +46,6 @@ const FreeConsult = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     Swal.fire({
@@ -95,7 +94,6 @@ const FreeConsult = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
       <section className="bg-bg2 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -124,7 +122,6 @@ const FreeConsult = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-          {/* Benefits Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -162,7 +159,6 @@ const FreeConsult = () => {
               ))}
             </div>
 
-            {/* What to Expect */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -231,7 +227,6 @@ const FreeConsult = () => {
             </motion.div>
           </motion.div>
 
-          {/* Consultation Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}

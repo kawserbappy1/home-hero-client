@@ -36,10 +36,14 @@ const HeroSlider = () => {
         keyboard={true}
         modules={[Navigation, Pagination, Mousewheel, Keyboard]}
         className="mySwiper"
+        slidesPerView={1}
+        spaceBetween={10}
+        centeredSlides={true}
+        loop={true}
       >
         <SwiperSlide>
           {/* slider 1  */}
-          <div className="flex flex-col-reverse lg:flex-row items-center gap-10 py-20">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-2 md:gap-10 py-20">
             {/* slider left  */}
             <div
               className="flex-1 "
@@ -92,7 +96,7 @@ const HeroSlider = () => {
             </div>
             {/* slider right  */}
             <div
-              className="flex-1 flex gap-2 items-center"
+              className="flex-1 flex gap-0 md:gap-2 items-center"
               data-aos="fade-left"
               data-aos-duration="4000"
             >
@@ -145,7 +149,7 @@ const HeroSlider = () => {
                   </div>
                 </div>
               </div>
-              <div>
+              <div className=" hidden md:block">
                 <div className="">
                   <img
                     src={cln3}
@@ -167,7 +171,7 @@ const HeroSlider = () => {
         {/* slider 2  */}
         <SwiperSlide>
           {/* slider 2  */}
-          <div className="flex flex-col-reverse lg:flex-row items-center gap-10 py-20">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-2 md:gap-10 py-20">
             {/* slider left  */}
             <div className="flex-1">
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold mb-5">
@@ -215,7 +219,7 @@ const HeroSlider = () => {
               </div>
             </div>
             {/* slider right  */}
-            <div className="flex-1 flex gap-2 items-center">
+            <div className="flex-1 flex gap-0 md:gap-2 items-center">
               <div>
                 <div className="flex">
                   <img src={per1} alt="" className=" size-12 rounded-full " />
@@ -265,7 +269,7 @@ const HeroSlider = () => {
                   </div>
                 </div>
               </div>
-              <div>
+              <div className=" hidden md:block">
                 <div className="">
                   <img
                     src={ele2}
@@ -286,7 +290,7 @@ const HeroSlider = () => {
         </SwiperSlide>
         {/* slider 3  */}
         <SwiperSlide>
-          <div className="flex flex-col-reverse lg:flex-row items-center gap-10 py-20">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-2 md:gap-10 py-20">
             {/* slider left  */}
             <div className="flex-1">
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold mb-5">
@@ -334,7 +338,7 @@ const HeroSlider = () => {
               </div>
             </div>
             {/* slider right  */}
-            <div className="flex-1 flex gap-2 items-center">
+            <div className="flex-1 flex gap-0 md:gap-2 items-center">
               <div>
                 <div className="flex">
                   <img src={per1} alt="" className=" size-12 rounded-full " />
@@ -384,7 +388,7 @@ const HeroSlider = () => {
                   </div>
                 </div>
               </div>
-              <div>
+              <div className=" hidden md:block">
                 <div className="">
                   <img
                     src={ele2}
@@ -405,7 +409,7 @@ const HeroSlider = () => {
         </SwiperSlide>
         {/* slider 4  */}
         <SwiperSlide>
-          <div className="flex flex-col-reverse lg:flex-row items-center gap-10 py-20">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-2 md:gap-10 py-20">
             {/* slider left  */}
             <div className="flex-1">
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold mb-5">
@@ -453,7 +457,7 @@ const HeroSlider = () => {
               </div>
             </div>
             {/* slider right  */}
-            <div className="flex-1 flex gap-2 items-center">
+            <div className="flex-1 flex gap-0 md:gap-2 items-center">
               <div>
                 <div className="flex">
                   <img src={per1} alt="" className=" size-12 rounded-full " />
@@ -503,7 +507,7 @@ const HeroSlider = () => {
                   </div>
                 </div>
               </div>
-              <div>
+              <div className=" hidden md:block">
                 <div className="">
                   <img
                     src={car2}
@@ -524,7 +528,7 @@ const HeroSlider = () => {
         </SwiperSlide>
         {/* slider 5  */}
         <SwiperSlide>
-          <div className="flex flex-col-reverse lg:flex-row items-center gap-10 py-20">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-2 md:gap-10 py-20">
             {/* slider left  */}
             <div className="flex-1">
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold mb-5">
@@ -572,7 +576,7 @@ const HeroSlider = () => {
               </div>
             </div>
             {/* slider right  */}
-            <div className="flex-1 flex gap-2 items-center">
+            <div className="flex-1 flex gap-0 md:gap-2 items-center">
               <div>
                 <div className="flex">
                   <img src={per1} alt="" className=" size-12 rounded-full " />
@@ -622,7 +626,7 @@ const HeroSlider = () => {
                   </div>
                 </div>
               </div>
-              <div>
+              <div className=" hidden md:block">
                 <div className="">
                   <img
                     src={pan2}

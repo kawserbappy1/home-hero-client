@@ -28,8 +28,8 @@ const Services = () => {
       try {
         const url =
           selectedCategory === "All"
-            ? "http://localhost:3000/services"
-            : `http://localhost:3000/services?category=${selectedCategory.toLowerCase()}`;
+            ? "https://hero-home-server-sage.vercel.app/services"
+            : `https://hero-home-server-sage.vercel.app/services?category=${selectedCategory.toLowerCase()}`;
 
         const res = await fetch(url);
         const data = await res.json();
@@ -62,7 +62,6 @@ const Services = () => {
       <div className=" pb-10">
         <ServicePageBanner />
 
-        {/* Header Bar */}
         <div className="container mx-auto flex flex-wrap items-center justify-between py-10 gap-4 px-2">
           <h2 className="hidden lg:block font-heading text-3xl md:text-4xl font-bold text-greenColor">
             Service Category
@@ -89,8 +88,6 @@ const Services = () => {
         </div>
 
         <div className="container mx-auto grid grid-cols-12 gap-5 px-2">
-          {/* Sidebar Categories */}
-
           <div className="col-span-12 md:col-span-2 flex md:flex-col flex-row md:gap-3 gap-2 flex-wrap pb-3 ">
             {categories.map((cat) => (
               <button
@@ -107,7 +104,6 @@ const Services = () => {
             ))}
           </div>
 
-          {/* Services Grid */}
           <div className="col-span-12 md:col-span-10">
             {loading ? (
               <Loader />

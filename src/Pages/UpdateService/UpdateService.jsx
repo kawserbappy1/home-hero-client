@@ -24,7 +24,7 @@ const UpdateService = () => {
       serviceReview: e.target.serviceReview.value,
     };
 
-    fetch(`http://localhost:3000/services/${service._id}`, {
+    fetch(`https://hero-home-server-sage.vercel.app/services/${service._id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -174,7 +174,7 @@ const UpdateService = () => {
             name="provideremail"
             defaultValue={service.provideremail}
             readOnly
-            className="w-full border border-gray-200 bg-gray-100 rounded-lg px-4 py-2 cursor-not-allowed"
+            className="w-full border border-gray-200 bg-bg1 rounded-lg px-4 py-2 cursor-not-allowed"
           />
         </div>
 
@@ -217,7 +217,7 @@ const UpdateService = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             type="submit"
-            className="bg-greenColor text-yellowColor font-bold py-3 px-10 rounded-xl shadow-md hover:bg-yellowColor hover:text-white transition-all duration-300"
+            className="bg-greenColor text-yellowColor font-bold py-3 px-10 rounded-xl shadow-md hover:bg-yellowColor hover:text-greenColor transition-all duration-300"
           >
             Update Service
           </motion.button>

@@ -177,7 +177,6 @@ const Careers = () => {
       confirmButtonText: "Continue to Application",
     }).then((result) => {
       if (result.isConfirmed) {
-        // In a real application, this would redirect to an application portal
         Swal.fire({
           title: "Application Portal",
           text: "This would redirect to our application system in a production environment.",
@@ -190,7 +189,6 @@ const Careers = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
       <section className="bg-bg2 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -217,7 +215,6 @@ const Careers = () => {
       </section>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Why Work With Us */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -235,7 +232,6 @@ const Careers = () => {
           </p>
         </motion.div>
 
-        {/* Benefits */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -261,7 +257,6 @@ const Careers = () => {
           </div>
         </motion.div>
 
-        {/* Job Openings */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -280,7 +275,7 @@ const Careers = () => {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                     activeDepartment === dept.id
                       ? "bg-greenColor text-yellowColor"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      : "bg-bg2 text-gray-700 hover:bg-gray-300"
                   }`}
                 >
                   {dept.name}
@@ -361,7 +356,6 @@ const Careers = () => {
           </div>
         </motion.div>
 
-        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -128,7 +128,7 @@ const TestimonialCard = ({
 }) => (
   <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-100 flex flex-col justify-between h-full">
     <div
-      data-aos="fade-left"
+      data-aos="fade-up"
       data-aos-duration="4000"
       className="flex items-center space-x-3 mb-4"
     >

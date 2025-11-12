@@ -11,7 +11,9 @@ const MyService = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-services?email=${user.email}`)
+    fetch(
+      `https://hero-home-server-sage.vercel.app/my-services?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setServices(data);

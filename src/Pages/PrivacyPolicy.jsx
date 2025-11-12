@@ -101,7 +101,6 @@ We will respond to your inquiry within 30 days.`,
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
       <section className="bg-bg2 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -129,7 +128,6 @@ We will respond to your inquiry within 30 days.`,
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="max-w-4xl mx-auto">
-          {/* Introduction */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -149,7 +147,6 @@ We will respond to your inquiry within 30 days.`,
             </p>
           </motion.div>
 
-          {/* Policy Sections */}
           <div className="space-y-8">
             {sections.map((section, index) => (
               <motion.div
@@ -169,7 +166,6 @@ We will respond to your inquiry within 30 days.`,
             ))}
           </div>
 
-          {/* Consent Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

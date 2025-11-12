@@ -8,7 +8,7 @@ const TopRatedProduct = () => {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/tr-services")
+    fetch("https://hero-home-server-sage.vercel.app/tr-services")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);

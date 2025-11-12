@@ -98,7 +98,6 @@ const ServiceGuarantee = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
       <section className="bg-bg2 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -126,7 +125,6 @@ const ServiceGuarantee = () => {
       </section>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Main Guarantee Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,7 +147,6 @@ const ServiceGuarantee = () => {
           </div>
         </motion.div>
 
-        {/* Guarantee Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {guarantees.map((guarantee, index) => (
             <motion.div
@@ -191,7 +188,6 @@ const ServiceGuarantee = () => {
           ))}
         </div>
 
-        {/* Commitment Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -222,7 +218,6 @@ const ServiceGuarantee = () => {
           </div>
         </motion.div>
 
-        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

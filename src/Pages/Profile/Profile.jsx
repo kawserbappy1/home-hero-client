@@ -43,7 +43,7 @@ const Profile = () => {
 
   return (
     <div className="container mx-auto py-10 px-4 flex justify-center">
-      <div className="bg-white shadow-lg rounded-2xl p-6 max-w-md w-full">
+      <div className="bg-white shadow-lg rounded-2xl p-6 max-w-md w-full border border-greenColor">
         <h2 className="text-3xl font-bold text-greenColor text-center mb-6">
           My Profile
         </h2>

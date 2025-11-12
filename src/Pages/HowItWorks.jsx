@@ -67,7 +67,6 @@ const HowItWorks = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
       <section className="bg-bg2 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -94,7 +93,6 @@ const HowItWorks = () => {
         </div>
       </section>
 
-      {/* Steps Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
@@ -106,18 +104,18 @@ const HowItWorks = () => {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300"
               >
-                <div className="flex items-start space-x-6">
+                <div className="flex items-start space-x-2 md:space-x-6">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-greenColor rounded-full flex items-center justify-center text-2xl">
+                    <div className="w-10 h-10 md:w-16 md:h-16 bg-greenColor rounded-full flex items-center justify-center text-2xl">
                       {step.icon}
                     </div>
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-4 mb-4">
-                      <span className="text-5xl font-bold text-gray-200 font-heading">
+                      <span className="text-3xl md:text-5xl font-bold text-gray-200 font-heading">
                         {step.number}
                       </span>
-                      <h3 className="text-2xl font-bold text-gray-900">
+                      <h3 className=" text-xl md:text-2xl font-bold text-gray-900">
                         {step.title}
                       </h3>
                     </div>
@@ -153,7 +151,6 @@ const HowItWorks = () => {
             ))}
           </div>
 
-          {/* Stats Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -163,7 +160,7 @@ const HowItWorks = () => {
             <h2 className="text-3xl font-bold text-yellowColor mb-8">
               Why Choose Our Platform?
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
@@ -183,7 +180,6 @@ const HowItWorks = () => {
             </div>
           </motion.div>
 
-          {/* CTA Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

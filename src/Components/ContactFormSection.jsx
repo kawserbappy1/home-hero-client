@@ -15,7 +15,7 @@ export default function ContactFormSection() {
   };
 
   const rightContentVariants = {
-    hidden: { opacity: 0, x: 100 },
+    hidden: { opacity: 0, x: 10 },
     visible: {
       opacity: 1,
       x: 0,
@@ -38,10 +38,10 @@ export default function ContactFormSection() {
   };
 
   return (
-    <div className="bg-bg1">
+    <div className="bg-bg1 pb-8 mb-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h4
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}

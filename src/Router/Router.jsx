@@ -77,7 +77,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/services/${params.id}`),
+          fetch(
+            `https://hero-home-server-sage.vercel.app/services/${params.id}`
+          ),
       },
       {
         path: "profile",
