@@ -51,16 +51,57 @@ Hero Home is built with a modern and robust MERN-adjacent stack, utilizing the f
 
 ---
 
-## 🔗 Live Site
+## 💻 How to Run Locally
 
-_(If you have a deployed link, include it here.)_
+Follow these steps to run Hero Home on your local machine:
 
-**Website URL:** [Insert Website URL Here]
+### 1. Clone the repository
 
----
+git clone 
+cd hero-home
 
-## 📞 Contact
+### 2. Install dependencies
+Frontend
+cd client
+npm install
+
+Backend
+cd ../server
+npm install
+
+### 3. Set up environment variables
+
+Create a .env file in the server folder with the following variables (replace with your own credentials):
+
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+FIREBASE_API_KEY=your_firebase_api_key
+FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+FIREBASE_PROJECT_ID=your_firebase_project_id
+FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+FIREBASE_APP_ID=your_firebase_app_id
+
+### 4. Start the server
+cd server
+npm run start   # or npm run dev if using nodemon
+
+### 5. Start the frontend
+cd ../client
+npm start
+
+### 6. Open the app
+
+Visit http://localhost:3000
+ in your browser to see the application running locally.
+
+🔗 Live Site
+
+Website URL: hero-home-service.netlify.app
+
+📞 Contact
 
 If you have any questions or feedback, please feel free to reach out to the project maintainer.
 
-- **Your Name/GitHub Profile:** [Your Name/GitHub Link]
+Md. Kawser Hamid Bappy: GitHub Profile
+
