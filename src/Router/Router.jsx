@@ -13,15 +13,15 @@ import PrivateRoute from "./PrivateRoute";
 import UpdateService from "../Pages/UpdateService/UpdateService";
 import ErrorPage from "../Components/ErrorPage";
 import ServiceProviderInfo from "../Pages/ServiceProviderInfo/ServiceProviderInfo";
-import FAQ from "../Pages/FAQ";
-import ContactUs from "../Pages/ContactUs";
-import HowItWorks from "../Pages/HowItWorks";
-import ServiceGuarantee from "../Pages/ServiceGuarantee";
-import FreeConsult from "../Pages/FreeConsult";
-import AboutUs from "../Pages/AboutUs";
-import Careers from "../Pages/Careers";
-import PrivacyPolicy from "../Pages/PrivacyPolicy";
-import TermsAndConditions from "../Pages/TermsAndConditions";
+import FAQ from "../Pages/Faq/FAQ";
+import ContactUs from "./../Pages/ContactUs/ContactUs";
+import HowItWorks from "./../Pages/HowItWork/HowItWorks";
+import ServiceGuarantee from "./../Pages/ServiceGurantee/ServiceGuarantee";
+import FreeConsult from "./../Pages/FreeConsult/FreeConsult";
+import AboutUs from "./../Pages/AboutUs/AboutUs";
+import Careers from "./../Pages/Careers/Careers";
+import PrivacyPolicy from "./../Pages/PrivacyPolicy/PrivacyPolicy";
+import TermsAndConditions from "./../Pages/TermsCondition/TermsAndConditions";
 
 const router = createBrowserRouter([
   {

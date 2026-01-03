@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContex";
 import {
   createUserWithEmailAndPassword,
@@ -31,16 +31,10 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  const updateUserProfile = async (displayName, photoURL) => {
+  const updateUserProfile = async (profile) => {
     if (!auth.currentUser) return;
-
-    await updateProfile(auth.currentUser, { displayName, photoURL });
-
-    setUser({
-      ...auth.currentUser,
-      displayName,
-      photoURL,
-    });
+    setLoading(true);
+    return updateProfile(auth.currentUser, profile);
   };
 
   const signOutUser = () => {

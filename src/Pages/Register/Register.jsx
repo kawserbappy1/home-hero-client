@@ -1,65 +1,55 @@
-import React, { use, useState } from "react";
+import { use, useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock, User, Phone, User2 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate, useNavigation } from "react-router";
 import { AuthContext } from "../../Context/AuthContex";
-import toast from "react-hot-toast";
-import Swal from "sweetalert2";
-
+import { FaCamera, FaCloudUploadAlt, FaUser } from "react-icons/fa";
+import { useForm, useWatch } from "react-hook-form";
+import { uploadImage } from "../../utility/imageUpload.js";
+import { toast } from "react-toastify";
 const Register = () => {
   const { createUser, updateUserProfile, signInWithGoogle } = use(AuthContext);
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const displayName = e.target.displayName.value.trim();
-    const photoURL = e.target.photoURL.value.trim();
-    const email = e.target.email.value.trim();
-    const password = e.target.password.value;
-    const confirmPassword = e.target.confirmPassword.value;
-
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-    if (!passwordRegex.test(password)) {
-      Swal.fire({
-        icon: "error",
-        title: "Weak Password",
-        text: "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.",
-      });
-      return;
+  const [previewImage, setPreviewImage] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigation();
+  const form = location?.state?.pathname || "/";
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    reset,
+  } = useForm();
+  const watchConfirmPasswrod = useWatch({
+    name: "password",
+    control,
+  });
+  const handleFormSubmit = async (data) => {
+    console.log(data);
+    try {
+      const ImageData = data.photo[0];
+      const imageURL = await uploadImage(ImageData);
+      await createUser(data.email, data.password);
+      const userInfoToFirebase = {
+        name: data.name,
+        email: data.email,
+        displayURL: imageURL,
+      };
+      await updateUserProfile(userInfoToFirebase);
+      toast.success("Sign Up successfull");
+      reset();
+      navigate(form, { replace: true });
+    } catch (err) {
+      if (err?.code === "auth/email-already-in-use") {
+        toast.error("This Email already exists.");
+      } else {
+        toast.error("Signup Failed ! Try again later");
+      }
     }
-
-    if (password !== confirmPassword) {
-      Swal.fire({
-        icon: "error",
-        title: "Password Mismatch",
-        text: "Passwords do not match. Please confirm your password correctly.",
-      });
-      return;
-    }
-    setIsLoading(true);
-    createUser(email, password)
-      .then((result) => {
-        updateUserProfile(displayName, photoURL);
-      })
-      .then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Account Created Successfully!",
-          text: "Welcome Hero Home!",
-        });
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error(error);
-        toast.error(error.message);
-      })
-      .finally(() => setIsLoading(false));
   };
 
   const handleGoogleSignIn = () => {
@@ -76,7 +66,7 @@ const Register = () => {
       });
   };
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-green-50 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -104,7 +94,45 @@ const Register = () => {
           </div>
 
           <div className="p-8">
-            <form onSubmit={handleFormSubmit} className="space-y-4">
+            <form
+              onSubmit={handleSubmit(handleFormSubmit)}
+              className="space-y-4"
+            >
+              <div className="relative w-24 h-24 ">
+                <div className="w-24 h-24 rounded-full border-4 border-gray-300 shadow-xl overflow-hidden bg-linear-to-br from-gray-100 to-gray-200">
+                  <div className="w-full h-full flex items-center justify-center">
+                    {previewImage ? (
+                      <img src={previewImage} alt=""></img>
+                    ) : (
+                      <FaUser className="text-gray-400 text-5xl" />
+                    )}
+                  </div>
+                </div>
+                <div className=" absolute bottom-0 right-0 bg-linear-to-r from-blue-500 to-emerald-500 w-10 h-10 rounded-full flex items-center justify-center text-white">
+                  <FaCamera></FaCamera>
+                </div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  {...register("photo", {
+                    required: true,
+                    message: "Profile image is requred",
+                    onChange: (e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        setPreviewImage(URL.createObjectURL(file));
+                      }
+                    },
+                  })}
+                  className=" absolute w-full h-full inset-0 opacity-0 cursor-pointer"
+                />
+              </div>
+              <div>
+                <p className="flex items-center gap-2">
+                  <FaCloudUploadAlt />
+                  Upload profile
+                </p>
+              </div>
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -114,16 +142,31 @@ const Register = () => {
                   Full Name
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <div className="absolute top-4 left-0 pl-3 flex items-center pointer-events-none">
                     <User className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
                     type="text"
-                    name="displayName"
-                    required
+                    {...register("name", {
+                      required: {
+                        value: true,
+                        message: "Name is Required",
+                      },
+                      minLength: {
+                        value: 8,
+                        message: "Name must be at least 8 charchter",
+                      },
+                    })}
                     className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellowColor focus:border-yellowColor transition-all duration-200"
                     placeholder="Enter your full name"
                   />
+                  <div className="h-4">
+                    {errors?.name && (
+                      <span className="text-xs font-bold text-red-500">
+                        {errors?.name?.message}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </motion.div>
               <motion.div
@@ -135,41 +178,34 @@ const Register = () => {
                   Email Address
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <div className="absolute top-4 left-0 pl-3 flex items-center pointer-events-none">
                     <Mail className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
                     type="email"
-                    name="email"
-                    required
+                    {...register("email", {
+                      required: {
+                        value: true,
+                        message: "email is required",
+                      },
+                      pattern: {
+                        value:
+                          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        message: "Type your valid email",
+                      },
+                    })}
                     className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellowColor focus:border-yellowColor transition-all duration-200"
                     placeholder="Enter your email"
                   />
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 }}
-              >
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Photo URL
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <User2 className="h-5 w-5 text-gray-400" />
+                  <div className="h-4">
+                    {errors?.email && (
+                      <span className="text-xs font-bold text-red-500">
+                        {errors?.email?.message}
+                      </span>
+                    )}
                   </div>
-                  <input
-                    type="text"
-                    name="photoURL"
-                    required
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellowColor focus:border-yellowColor transition-all duration-200"
-                    placeholder="Enter your Photo URL"
-                  />
                 </div>
               </motion.div>
-
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -179,16 +215,35 @@ const Register = () => {
                   Password
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <div className="absolute top-4 left-0 pl-3 flex items-center pointer-events-none">
                     <Lock className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
                     type={showPassword ? "text" : "password"}
-                    name="password"
-                    required
+                    {...register("password", {
+                      required: {
+                        value: true,
+                        message: "Password is required",
+                      },
+                      minLength: {
+                        value: 6,
+                        message: "Password Must be at least 6 charchter",
+                      },
+                      pattern: {
+                        value:
+                          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                        message:
+                          "Password contain a digit, a uppercase, a lowercase and a specia charchter",
+                      },
+                    })}
                     className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                     placeholder="Create a password"
                   />
+                  {errors?.password && (
+                    <span className="text-xs font-bold text-red-500">
+                      {errors?.password?.message}
+                    </span>
+                  )}
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
@@ -212,16 +267,31 @@ const Register = () => {
                   Confirm Password
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <div className="absolute top-4 left-0 pl-3 flex items-center pointer-events-none">
                     <Lock className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
                     type={showConfirmPassword ? "text" : "password"}
-                    name="confirmPassword"
-                    required
+                    {...register("confirm_password", {
+                      required: {
+                        value: true,
+                        message: "Confirm password is required",
+                      },
+                      validate: (value) => {
+                        if (value === watchConfirmPasswrod) {
+                          return true;
+                        }
+                        return "Password does not matched";
+                      },
+                    })}
                     className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                     placeholder="Confirm your password"
                   />
+                  {errors?.confirm_password && (
+                    <span className="text-xs font-bold text-red-500">
+                      {errors?.confirm_password?.message}
+                    </span>
+                  )}
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
