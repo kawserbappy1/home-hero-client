@@ -1,8 +1,8 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../Context/AuthContex";
 import { Helmet } from "react-helmet";
+import useAuth from "../../hooks/useAuth";
 
 const categories = [
   "Cleaning",
@@ -13,7 +13,7 @@ const categories = [
 ];
 
 const AddService = () => {
-  const { user } = use(AuthContext);
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleAddService = (e) => {

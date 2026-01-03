@@ -32,11 +32,9 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateUserProfile = async (profile) => {
-    if (!auth.currentUser) return;
-    setLoading(true);
     return updateProfile(auth.currentUser, profile);
   };
-
+  console.log(user);
   const signOutUser = () => {
     setLoading(true);
     return signOut(auth);

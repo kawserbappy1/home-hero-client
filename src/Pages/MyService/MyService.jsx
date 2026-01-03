@@ -1,12 +1,12 @@
-import React, { use, useEffect, useState } from "react";
-import { AuthContext } from "../../Context/AuthContex";
+import React, { useEffect, useState } from "react";
 import Loader from "../../Components/Loader";
 import ProductCard from "./../../Components/ProductCard";
 import NoServiceFound from "../../Components/NoServiceFound";
 import { Helmet } from "react-helmet";
+import useAuth from "../../hooks/useAuth";
 
 const MyService = () => {
-  const { user } = use(AuthContext);
+  const { user } = useAuth();
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
 

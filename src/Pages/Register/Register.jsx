@@ -1,21 +1,24 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock, User, Phone, User2 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useLocation, useNavigate, useNavigation } from "react-router";
-import { AuthContext } from "../../Context/AuthContex";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FaCamera, FaCloudUploadAlt, FaUser } from "react-icons/fa";
 import { useForm, useWatch } from "react-hook-form";
-import { uploadImage } from "../../utility/imageUpload.js";
 import { toast } from "react-toastify";
+import {
+  claudinaryImageUpload,
+  savedOrGetNewUser,
+} from "./../../utility/index";
+import useAuth from "../../hooks/useAuth";
 const Register = () => {
-  const { createUser, updateUserProfile, signInWithGoogle } = use(AuthContext);
+  const { createUser, updateUserProfile, signInWithGoogle } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
   const location = useLocation();
-  const navigate = useNavigation();
+  const navigate = useNavigate();
   const form = location?.state?.pathname || "/";
   const {
     register,
@@ -29,17 +32,34 @@ const Register = () => {
     control,
   });
   const handleFormSubmit = async (data) => {
-    console.log(data);
     try {
-      const ImageData = data.photo[0];
-      const imageURL = await uploadImage(ImageData);
+      if (isLoading) return;
+      setIsLoading(true);
+      const ImageData = data.photo?.[0];
+      if (!ImageData) {
+        toast.error("Profile image is required");
+        return;
+      }
+      const imageURL = await claudinaryImageUpload(ImageData);
+      if (!imageURL) {
+        toast.error("Image upload failed");
+        return;
+      }
       await createUser(data.email, data.password);
       const userInfoToFirebase = {
+        displayName: data.name,
+        photoURL: imageURL,
+      };
+
+      await updateUserProfile(userInfoToFirebase);
+
+      const userInfoDb = {
         name: data.name,
         email: data.email,
-        displayURL: imageURL,
+        photoURL: imageURL,
       };
-      await updateUserProfile(userInfoToFirebase);
+      await savedOrGetNewUser(userInfoDb);
+
       toast.success("Sign Up successfull");
       reset();
       navigate(form, { replace: true });
@@ -52,18 +72,19 @@ const Register = () => {
     }
   };
 
-  const handleGoogleSignIn = () => {
-    toast.loading("Creating user...", { id: "create-user" });
-    signInWithGoogle()
-      .then((result) => {
-        toast.success("User created successfully!", { id: "create-user" });
-        console.log(result.user);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error(error.message, { id: "create-user" });
+  const handleGoogleSignIn = async () => {
+    try {
+      const { user } = await signInWithGoogle();
+      await savedOrGetNewUser({
+        name: user?.displayName,
+        email: user?.email,
+        photoURL: user?.photoURL,
       });
+      toast.success("User created successfully!");
+      navigate(form, { replace: true });
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-green-50 flex items-center justify-center p-4">
@@ -247,7 +268,7 @@ const Register = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                    className="absolute top-4 right-0 pr-3 flex items-center"
                   >
                     {showPassword ? (
                       <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
@@ -295,7 +316,7 @@ const Register = () => {
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                    className="absolute top-4 right-0 pr-3 flex items-center"
                   >
                     {showConfirmPassword ? (
                       <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />

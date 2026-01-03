@@ -22,6 +22,8 @@ import AboutUs from "./../Pages/AboutUs/AboutUs";
 import Careers from "./../Pages/Careers/Careers";
 import PrivacyPolicy from "./../Pages/PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "./../Pages/TermsCondition/TermsAndConditions";
+import DashboardLayout from "../Layout/DashboardLayout";
+import DashboardIndex from "../Pages/Dashboard/DashboardIndex/DashboardIndex";
 
 const router = createBrowserRouter([
   {
@@ -136,6 +138,17 @@ const router = createBrowserRouter([
       {
         path: "/term-condition",
         element: <TermsAndConditions></TermsAndConditions>,
+      },
+    ],
+  },
+
+  {
+    path: "dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        index: true,
+        element: <DashboardIndex></DashboardIndex>,
       },
     ],
   },

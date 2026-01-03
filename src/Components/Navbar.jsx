@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContex";
 import Swal from "sweetalert2";
 import ThemeToggle from "./ThemeToggle";
+import { FaRegUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -138,10 +139,7 @@ const Navbar = () => {
               <>
                 <div className="relative">
                   <img
-                    src={
-                      user.photoURL ||
-                      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    }
+                    src={user.photoURL || <FaRegUserCircle />}
                     onClick={() => setUserMenuOpen(!userMenuOpen)}
                     alt="User Avatar"
                     className="size-10 rounded-full border-2 border-greenColor object-cover cursor-pointer"
@@ -150,6 +148,19 @@ const Navbar = () => {
                   {/* Dropdown Menu */}
                   {userMenuOpen && (
                     <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg py-2 text-sm z-50">
+                      <button className="border-b border-b-gray-200 px-4 pb-2">
+                        <h2 className="text-black text-start ">
+                          {user.displayName}
+                        </h2>
+                        <span className="text-xs font-bold">{user.email}</span>
+                      </button>
+                      <Link
+                        to="/dashboard"
+                        className="block px-4 py-2 hover:bg-gray-100 hover:text-greenColor"
+                        onClick={() => setUserMenuOpen(false)}
+                      >
+                        Dashboard
+                      </Link>
                       <Link
                         to="/profile"
                         className="block px-4 py-2 hover:bg-gray-100 hover:text-greenColor"
