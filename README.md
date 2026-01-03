@@ -51,11 +51,14 @@ Hero Home is built with a modern and robust MERN-adjacent stack, utilizing the f
 
 ---
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 160a22a33e60455f162a45b1c737a04ae6357e39
 ## 🔗 Live Site
 
-_(If you have a deployed link, include it here.)_
-
-**Website URL:** [Insert Website URL Here]
+**Website URL:** https://hero-home-service.netlify.app/
 
 ---
 
@@ -63,4 +66,4 @@ _(If you have a deployed link, include it here.)_
 
 If you have any questions or feedback, please feel free to reach out to the project maintainer.
 
-- **Your Name/GitHub Profile:** [Your Name/GitHub Link]
+- **Your Name/GitHub Profile:** https://github.com/kawserbappy1
